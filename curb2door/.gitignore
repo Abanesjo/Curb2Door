@@ -1,0 +1,6 @@
+bag_raw/*
+bag_processed/*
+
+!bag_raw/.gitkeep
+!bag_processed/.gitkeep
+
