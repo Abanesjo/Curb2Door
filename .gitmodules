@@ -7,3 +7,6 @@
 [submodule "r3live"]
 	path = r3live
 	url = https://github.com/hku-mars/r3live
+[submodule "livox_ros_driver2"]
+	path = livox_ros_driver2
+	url = https://github.com/Abanesjo/livox_ros_driver2.git
