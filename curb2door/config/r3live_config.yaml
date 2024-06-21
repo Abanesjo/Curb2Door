@@ -10,8 +10,8 @@ r3live_common:
    pub_pt_minimum_views: 3          # Publish points which have been render up to "pub_pt_minimum_views" time. [default = 3]
    minimum_pts_size: 0.01           # The minimum distance for every two points in Global map (unit in meter). [default = 0.01] 
    image_downsample_ratio: 1        # The downsample ratio of the input image. [default = 1]
-   estimate_i2c_extrinsic: 1        # If enable estimate the extrinsic between camera and IMU. [default = 1] 
-   estimate_intrinsic: 1            # If enable estimate the online intrinsic calibration of the camera lens. [default = 1] 
+   estimate_i2c_extrinsic: 0        # If enable estimate the extrinsic between camera and IMU. [default = 1] 
+   estimate_intrinsic: 0            # If enable estimate the online intrinsic calibration of the camera lens. [default = 1] 
    maximum_vio_tracked_pts: 600     # The maximum points for tracking. [default = 600]
    append_global_map_point_step: 4  # The point step of append point to global map. [default = 4]
 
@@ -25,11 +25,11 @@ r3live_vio:
    camera_dist_coeffs: [0.0, 0.0, 0.0, 0.0, 0.0]  #k1, k2, p1, p2, k3
    # Fine extrinsic value. form camera-LiDAR calibration.
    camera_ext_R:
-         [9.99040e-01, -1.76183e-02,  4.00940e-02,
-          4.12139e-02,  6.86159e-02, -9.96791e-01,
-          1.48107e-02,  9.97488e-01,  6.92762e-02]
+         [0.0620691, -0.986315, -0.152733,
+         -0.115094, 0.144933, -0.982724,
+         0.991414, 0.078576, -0.104523]
    # camera_ext_t: [0.050166, 0.0474116, -0.0312415] 
-   camera_ext_t: [0,0.367814,0.13945] 
+   camera_ext_t: [-0.213069, 0.440053, 0.0305865]
    # Rough extrinsic value, form CAD model, is not correct enough, but can be online calibrated in our datasets.
    # camera_ext_R:
    #    [0, 0, 1,

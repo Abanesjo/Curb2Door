@@ -1,16 +1,13 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="rviz" default="false"/>
-    <arg name="livox" default="true"/>
+    <!-- <arg name="livox" default="true"/> -->
 
-    <include if="$(arg livox)" file="$(find livox_ros_driver2)/launch/msg_MID360.launch"/>
-    <include unless="$(arg livox)" file="$(find livox_ros_driver2)/launch/rviz_MID360.launch"/>
+    <include file="$(find livox_ros_driver2)/launch/msg_MID360.launch"/>
+    <!-- <include unless="$(arg livox)" file="$(find livox_ros_driver2)/launch/rviz_MID360.launch"/> -->
     <include file="$(find curb2door)/launch/air.launch"/>
 
-    <!-- <node if="$(arg livox)" name="rosbag" pkg="rosbag" type="record" args="-o $(find curb2door)/bag_raw/ /livox/lidar /livox/imu /camera360/image_raw/compressed" output="screen"/>
+    <node name="rosbag" pkg="rosbag" type="record" args="-o $(find curb2door)/bag_raw/ /livox/lidar /livox/imu /camera360/image_raw/compressed" output="screen"/>
 
-    <node unless="$(arg livox)" name="rosbag" pkg="rosbag" type="record" args="-o $(find curb2door)/bag_raw/ /livox/lidar /livox/imu /camera360/image_raw/compressed" output="screen">
-    </node> -->
-
-    <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find curb2door)/config/preview.rviz"/>
+    <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find curb2door)/config/preview.rviz"/>d
 </launch>

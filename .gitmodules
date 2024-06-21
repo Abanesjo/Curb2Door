@@ -10,3 +10,6 @@
 [submodule "livox_ros_driver2"]
 	path = livox_ros_driver2
 	url = https://github.com/Abanesjo/livox_ros_driver2.git
+[submodule "livox_camera_calib"]
+	path = livox_camera_calib
+	url = https://github.com/hku-mars/livox_camera_calib

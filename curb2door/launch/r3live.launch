@@ -1,10 +1,26 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="rviz" default="true"/>
+    <arg name="record" default="true"/>
 
     <remap from="/back_camera_image/compressed" to="/camera/image_color/compressed"/>
-    <node name="rosbag" pkg="rosbag" type="play" args="--clock $(find curb2door)/bag_processed/processed_old_driver.bag"/>
-    <include file="$(find r3live)/launch/r3live_bag.launch">
-    <node if="$(arg rviz)" name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(find curb2door)/config/r3live.rviz" />
-    </include>
+    <node name="livox_to_camera_init" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 livox_frame camera_init 30"/>
+    <node if="$(arg record)" name="rosbag" pkg="rosbag" type="play" args="$(find curb2door)/bag_processed/processed.bag"/>
+    
+    <!-- R3LIVE -->
+
+    <param name="LiDAR_pointcloud_topic" type="string" value= "/laser_cloud_flat" />
+    <param name="IMU_topic" type="string" value= "/livox/imu" />
+    <param name="Image_topic" type="string" value= "/camera/image_color" />
+    <param name="r3live_common/map_output_dir" type="string" value="$(env HOME)/r3live_output" />
+    <rosparam command="load" file="$(find curb2door)/config/r3live_config.yaml" />
+
+    <node pkg="r3live" type="r3live_LiDAR_front_end" name="r3live_LiDAR_front_end"  output="screen" required="true"/>
+    <node pkg="r3live" type="r3live_mapping" name="r3live_mapping" output="screen" required="true" />
+    
+    <group if="$(arg rviz)">
+        <node name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(find r3live)/../config/rviz/r3live_rviz_config.rviz" />
+    </group>
+
+    <!-- R3LIVE -->
 </launch>
