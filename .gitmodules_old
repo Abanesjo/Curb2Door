@@ -1,15 +1,15 @@
-[submodule "insta360_ros_driver"]
+[submodule "dependencies/insta360_ros_driver"]
 	path = dependencies/insta360_ros_driver
 	url = https://github.com/ai4ce/insta360_ros_driver
-[submodule "livox_ros_driver_for_R2LIVE"]
+[submodule "dependencies/livox_ros_driver_for_R2LIVE"]
 	path = dependencies/livox_ros_driver_for_R2LIVE
 	url = https://github.com/ziv-lin/livox_ros_driver_for_R2LIVE
-[submodule "r3live"]
+[submodule "dependencies/r3live"]
 	path = dependencies/r3live
 	url = https://github.com/hku-mars/r3live
-[submodule "livox_ros_driver2"]
+[submodule "dependencies/livox_ros_driver2"]
 	path = dependencies/livox_ros_driver2
 	url = https://github.com/Abanesjo/livox_ros_driver2.git
-[submodule "livox_camera_calib"]
+[submodule "dependencies/livox_camera_calib"]
 	path = dependencies/livox_camera_calib
 	url = https://github.com/hku-mars/livox_camera_calib
