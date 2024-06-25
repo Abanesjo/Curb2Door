@@ -5,7 +5,7 @@
 
     <remap from="/back_camera_image/compressed" to="/camera/image_color/compressed"/>
     <node name="livox_to_camera_init" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 livox_frame camera_init 30"/>
-    <node if="$(arg record)" name="rosbag" pkg="rosbag" type="play" args="$(find curb2door)/bag_processed/processed.bag"/>
+    <node if="$(arg record)" name="rosbag" pkg="rosbag" type="play" args="$(find curb2door)/bag_processed/test_processed.bag"/>
     
     <!-- R3LIVE -->
 
@@ -14,6 +14,7 @@
     <param name="Image_topic" type="string" value= "/camera/image_color" />
     <param name="r3live_common/map_output_dir" type="string" value="$(env HOME)/r3live_output" />
     <rosparam command="load" file="$(find curb2door)/config/r3live_config.yaml" />
+    <!-- <rosparam command="load" file="$(find r3live)/../config/r3live_config.yaml" /> -->
 
     <node pkg="r3live" type="r3live_LiDAR_front_end" name="r3live_LiDAR_front_end"  output="screen" required="true"/>
     <node pkg="r3live" type="r3live_mapping" name="r3live_mapping" output="screen" required="true" />
