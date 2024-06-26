@@ -4,6 +4,3 @@
 [submodule "dependencies/livox_ros_driver2"]
 	path = dependencies/livox_ros_driver2
 	url = https://github.com/Abanesjo/livox_ros_driver2.git
-[submodule "dependencies/livox_camera_calib"]
-	path = dependencies/livox_camera_calib
-	url = https://github.com/hku-mars/livox_camera_calib
