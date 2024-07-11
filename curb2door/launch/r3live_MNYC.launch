@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="rviz" default="true"/>
-    <arg name="bag_path" default="/mnt/e/work/curb2door/r3live_samples/bag_processed"/>
-    <arg name="bag_file" default="run4.bag"/>
-    <arg name="system" default="curb"/>
+    <arg name="bag_path" default="/mnt/e/work/curb2door/r3live_samples/bag_r3live"/>
+    <arg name="bag_file" default="tandon_paulson.bag"/>
+    <arg name="system" default="red"/>
     <arg name="record" default="false"/>
     <arg name="record_path" default="/mnt/e/work/curb2door/r3live_samples/bag_r3live"/>
 
-    <node if="$(arg record)" name="rosbag_record" pkg="rosbag" type="record" args="-O $(arg record_path)/r3live_$(arg bag_file) /camera_odom /camera_path /track_img /raw_in_img" output="screen"/>
+    <node if="$(arg record)" name="rosbag_record" pkg="rosbag" type="record" args="-O $(arg record_path)/output_$(arg bag_file) /camera_odom /camera_path /camera/image_color/compressed /livox/lidar /livox/imu" output="screen"/>
 
     <group if="$(eval arg('system') == 'curb')">
         <remap from="/back_camera_image/compressed" to="/camera/image_color/compressed"/>
@@ -43,4 +43,5 @@
         <node name="rosbag" pkg="rosbag" type="play" args="$(arg bag_path)/$(arg bag_file)"/>
     </group>
 <!-- TODO: Record -> R3LIVE -> Play -->
+    <!-- R3LIVE -->
 </launch>
