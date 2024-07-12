@@ -1,14 +1,15 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="rviz" default="false"/>
     <arg name="bag_path" default="/mnt/e/work/curb2door/r3live_samples/bag_raw"/>
+    <arg name="record" default="true"/>
 
-    <node name="rosbag" pkg="rosbag" type="record" args="-o $(arg bag_path) /livox/lidar /livox/imu /insta_image_yuv" output="screen"/>
+    <node if="$(arg record)" name="rosbag" pkg="rosbag" type="record" args="-o $(arg bag_path) /livox/lidar /livox/imu /insta_image_yuv" output="screen"/>
 
-    <include file="$(find livox_ros_driver2)/launch/msg_MID360.launch"/>
-    <include file="$(find insta360_ros_driver)/launch/live_preview.launch">
+    <include file="$(find livox_ros_driver2)/launch/rviz_MID360.launch">
+        <arg name="rviz_enable" value="false"/>
+    </include>
+    <include file="$(find insta360_ros_driver)/launch/live_process.launch">
         <arg name="debug" value="false"/>
     </include>
-
-    <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find curb2door)/config/preview.rviz"/>d
+    <node if="$(arg debug)" name="rviz" pkg="rviz" type="rviz" args="-d $(find curb2door)/config/preview.rviz"/>d
 </launch>
