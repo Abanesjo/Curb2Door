@@ -39,7 +39,14 @@ roslaunch curb2door record.launch bag_path:=/home/bag_raw/ record:=True rviz:=Fa
 ```
 ## Processing Data 
 ```
+roslaunch curb2door r3live.launch record:=true
 ```
+![r3live_result](docs/r3live_result.png)
 ## Exporting Data
 ```
+cd src/Curb2Door/data_processing
+python bag_to_data.py # Converts bag file to odometry and image frames
+python data_matching.py #Matches timestamps via indeces
+python plot_data.py #Plots odometry data
 ```
+![odom_plot](docs/odom_plot.png)
