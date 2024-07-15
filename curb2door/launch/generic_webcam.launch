@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="camera_driver" pkg="curb2door" type="camera.py" output="screen"/>
+</launch>

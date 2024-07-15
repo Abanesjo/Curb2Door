@@ -20,7 +20,7 @@
         <node pkg="r3live" type="r3live_LiDAR_front_end" name="r3live_LiDAR_front_end"  output="screen" required="true"/>
         <node pkg="r3live" type="r3live_mapping" name="r3live_mapping" output="screen" required="true" />
 
-        <node if="$(arg rviz)" name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(find curb2door)/config/r3live_curb.rviz" />
+        <node if="$(arg rviz)" name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(find curb2door)/config/rviz/r3live_curb.rviz" />
         <node name="rosbag" pkg="rosbag" type="play" args="$(arg bag_path)/$(arg bag_file)"/>
     </group>
 
@@ -39,7 +39,7 @@
         <node pkg="r3live" type="r3live_LiDAR_front_end" name="r3live_LiDAR_front_end"  output="screen" required="true"/>
         <node pkg="r3live" type="r3live_mapping" name="r3live_mapping" output="screen" required="true" />
 
-        <node if="$(arg rviz)" name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(find curb2door)/config/r3live_MNYC.rviz" />
+        <node if="$(arg rviz)" name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(find curb2door)/config/rviz/r3live_MNYC.rviz" />
         <node name="rosbag" pkg="rosbag" type="play" args="$(arg bag_path)/$(arg bag_file)"/>
     </group>
 <!-- TODO: Record -> R3LIVE -> Play -->
