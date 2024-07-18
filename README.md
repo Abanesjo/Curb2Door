@@ -8,6 +8,7 @@ This repository contains code for the NYU Tandon Undergraduate Summer Research P
 2. [Recording Data](#Recording-Data)
 3. [Processing Data](#Processing-Data)
 4. [Exporting Data](#Exporting-Data)
+5. [Graphical User Interface](#graphical-user-interface)
 
 ---
 ## Installation
@@ -50,3 +51,14 @@ python data_matching.py #Matches timestamps via indeces
 python plot_data.py #Plots odometry data
 ```
 ![odom_plot](docs/odom_plot.png)
+
+## Graphical User Interface
+A GUI has been created to expedite data collection and debugging. The GUI can be launched via
+```
+cd wrapper
+python main.py
+```
+The interface allows seamless remote connection, data collection, and topic monitoring.
+![app_1.png](docs/app_1.png)
+![app_2.png](docs/app_2.png)
+![app_3.png](docs/app_3.png)
