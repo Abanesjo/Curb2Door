@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(927, 518)
+        MainWindow.resize(1131, 600)
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -40,9 +40,9 @@ class Ui_MainWindow(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Maximum)
         sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setVerticalStretch(1)
         sizePolicy1.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
         self.tabWidget.setSizePolicy(sizePolicy1)
         self.tab_remote = QWidget()
@@ -101,6 +101,9 @@ class Ui_MainWindow(object):
 
         self.line_connection_status = QLineEdit(self.tab_remote)
         self.line_connection_status.setObjectName(u"line_connection_status")
+        self.line_connection_status.setStyleSheet(u"QLineEdit {\n"
+"	background: rgb(223, 223, 223)\n"
+"}")
 
         self.gridLayout.addWidget(self.line_connection_status, 3, 3, 1, 1)
 
@@ -126,6 +129,7 @@ class Ui_MainWindow(object):
 
         self.line_workspace_path = QLineEdit(self.tab_ros)
         self.line_workspace_path.setObjectName(u"line_workspace_path")
+        self.line_workspace_path.setStyleSheet(u"")
 
         self.horizontalLayout.addWidget(self.line_workspace_path)
 
@@ -134,40 +138,88 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2 = QGridLayout()
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.line_bag_name = QLineEdit(self.tab_ros)
-        self.line_bag_name.setObjectName(u"line_bag_name")
+        self.line_bag_path = QLineEdit(self.tab_ros)
+        self.line_bag_path.setObjectName(u"line_bag_path")
         sizePolicy3 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.line_bag_name.sizePolicy().hasHeightForWidth())
-        self.line_bag_name.setSizePolicy(sizePolicy3)
+        sizePolicy3.setHeightForWidth(self.line_bag_path.sizePolicy().hasHeightForWidth())
+        self.line_bag_path.setSizePolicy(sizePolicy3)
+        self.line_bag_path.setMinimumSize(QSize(0, 0))
+        self.line_bag_path.setBaseSize(QSize(1, 0))
 
-        self.gridLayout_2.addWidget(self.line_bag_name, 4, 3, 1, 1)
+        self.gridLayout_2.addWidget(self.line_bag_path, 5, 4, 1, 1)
 
-        self.label_9 = QLabel(self.tab_ros)
-        self.label_9.setObjectName(u"label_9")
+        self.button_begin_recording = QPushButton(self.tab_ros)
+        self.button_begin_recording.setObjectName(u"button_begin_recording")
 
-        self.gridLayout_2.addWidget(self.label_9, 3, 2, 1, 1)
+        self.gridLayout_2.addWidget(self.button_begin_recording, 4, 0, 1, 1)
 
-        self.label_8 = QLabel(self.tab_ros)
-        self.label_8.setObjectName(u"label_8")
-
-        self.gridLayout_2.addWidget(self.label_8, 4, 2, 1, 1)
-
-        self.button_record = QPushButton(self.tab_ros)
-        self.button_record.setObjectName(u"button_record")
+        self.button_end_recording = QPushButton(self.tab_ros)
+        self.button_end_recording.setObjectName(u"button_end_recording")
         sizePolicy4 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.MinimumExpanding)
         sizePolicy4.setHorizontalStretch(0)
         sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.button_record.sizePolicy().hasHeightForWidth())
-        self.button_record.setSizePolicy(sizePolicy4)
+        sizePolicy4.setHeightForWidth(self.button_end_recording.sizePolicy().hasHeightForWidth())
+        self.button_end_recording.setSizePolicy(sizePolicy4)
 
-        self.gridLayout_2.addWidget(self.button_record, 2, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.button_end_recording, 4, 1, 1, 1)
+
+        self.button_chmod = QPushButton(self.tab_ros)
+        self.button_chmod.setObjectName(u"button_chmod")
+
+        self.gridLayout_2.addWidget(self.button_chmod, 1, 0, 1, 2)
+
+        self.button_preview = QPushButton(self.tab_ros)
+        self.button_preview.setObjectName(u"button_preview")
+        sizePolicy4.setHeightForWidth(self.button_preview.sizePolicy().hasHeightForWidth())
+        self.button_preview.setSizePolicy(sizePolicy4)
+
+        self.gridLayout_2.addWidget(self.button_preview, 5, 0, 2, 2)
+
+        self.line_bag_name = QLineEdit(self.tab_ros)
+        self.line_bag_name.setObjectName(u"line_bag_name")
+        sizePolicy3.setHeightForWidth(self.line_bag_name.sizePolicy().hasHeightForWidth())
+        self.line_bag_name.setSizePolicy(sizePolicy3)
+
+        self.gridLayout_2.addWidget(self.line_bag_name, 6, 4, 1, 1)
+
+        self.button_start = QPushButton(self.tab_ros)
+        self.button_start.setObjectName(u"button_start")
+        sizePolicy4.setHeightForWidth(self.button_start.sizePolicy().hasHeightForWidth())
+        self.button_start.setSizePolicy(sizePolicy4)
+
+        self.gridLayout_2.addWidget(self.button_start, 2, 0, 1, 1)
+
+        self.button_stop = QPushButton(self.tab_ros)
+        self.button_stop.setObjectName(u"button_stop")
+        sizePolicy4.setHeightForWidth(self.button_stop.sizePolicy().hasHeightForWidth())
+        self.button_stop.setSizePolicy(sizePolicy4)
+
+        self.gridLayout_2.addWidget(self.button_stop, 2, 1, 1, 1)
+
+        self.button_build_source = QPushButton(self.tab_ros)
+        self.button_build_source.setObjectName(u"button_build_source")
+        sizePolicy3.setHeightForWidth(self.button_build_source.sizePolicy().hasHeightForWidth())
+        self.button_build_source.setSizePolicy(sizePolicy3)
+
+        self.gridLayout_2.addWidget(self.button_build_source, 0, 0, 1, 5)
+
+        self.label_5 = QLabel(self.tab_ros)
+        self.label_5.setObjectName(u"label_5")
+        sizePolicy3.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
+        self.label_5.setSizePolicy(sizePolicy3)
+        self.label_5.setFrameShape(QFrame.NoFrame)
+
+        self.gridLayout_2.addWidget(self.label_5, 1, 3, 1, 2)
 
         self.groupBox = QGroupBox(self.tab_ros)
         self.groupBox.setObjectName(u"groupBox")
-        sizePolicy1.setHeightForWidth(self.groupBox.sizePolicy().hasHeightForWidth())
-        self.groupBox.setSizePolicy(sizePolicy1)
+        sizePolicy5 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.groupBox.sizePolicy().hasHeightForWidth())
+        self.groupBox.setSizePolicy(sizePolicy5)
         self.groupBox.setFlat(False)
         self.groupBox.setCheckable(False)
         self.verticalLayout_5 = QVBoxLayout(self.groupBox)
@@ -176,16 +228,16 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.radio_record_true = QRadioButton(self.groupBox)
         self.radio_record_true.setObjectName(u"radio_record_true")
-        sizePolicy1.setHeightForWidth(self.radio_record_true.sizePolicy().hasHeightForWidth())
-        self.radio_record_true.setSizePolicy(sizePolicy1)
+        sizePolicy5.setHeightForWidth(self.radio_record_true.sizePolicy().hasHeightForWidth())
+        self.radio_record_true.setSizePolicy(sizePolicy5)
         self.radio_record_true.setChecked(True)
 
         self.verticalLayout_4.addWidget(self.radio_record_true)
 
         self.radio_record__false = QRadioButton(self.groupBox)
         self.radio_record__false.setObjectName(u"radio_record__false")
-        sizePolicy1.setHeightForWidth(self.radio_record__false.sizePolicy().hasHeightForWidth())
-        self.radio_record__false.setSizePolicy(sizePolicy1)
+        sizePolicy5.setHeightForWidth(self.radio_record__false.sizePolicy().hasHeightForWidth())
+        self.radio_record__false.setSizePolicy(sizePolicy5)
         self.radio_record__false.setAutoFillBackground(False)
 
         self.verticalLayout_4.addWidget(self.radio_record__false)
@@ -194,57 +246,23 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.addLayout(self.verticalLayout_4)
 
 
-        self.gridLayout_2.addWidget(self.groupBox, 2, 2, 1, 2)
+        self.gridLayout_2.addWidget(self.groupBox, 2, 3, 1, 2)
 
-        self.button_build_source = QPushButton(self.tab_ros)
-        self.button_build_source.setObjectName(u"button_build_source")
-        sizePolicy3.setHeightForWidth(self.button_build_source.sizePolicy().hasHeightForWidth())
-        self.button_build_source.setSizePolicy(sizePolicy3)
+        self.label_9 = QLabel(self.tab_ros)
+        self.label_9.setObjectName(u"label_9")
 
-        self.gridLayout_2.addWidget(self.button_build_source, 0, 0, 1, 4)
+        self.gridLayout_2.addWidget(self.label_9, 5, 3, 1, 1)
 
-        self.line_bag_path = QLineEdit(self.tab_ros)
-        self.line_bag_path.setObjectName(u"line_bag_path")
-        sizePolicy3.setHeightForWidth(self.line_bag_path.sizePolicy().hasHeightForWidth())
-        self.line_bag_path.setSizePolicy(sizePolicy3)
-        self.line_bag_path.setMinimumSize(QSize(0, 0))
-        self.line_bag_path.setBaseSize(QSize(1, 0))
+        self.label_8 = QLabel(self.tab_ros)
+        self.label_8.setObjectName(u"label_8")
 
-        self.gridLayout_2.addWidget(self.line_bag_path, 3, 3, 1, 1)
+        self.gridLayout_2.addWidget(self.label_8, 6, 3, 1, 1)
 
-        self.label_5 = QLabel(self.tab_ros)
-        self.label_5.setObjectName(u"label_5")
-        sizePolicy3.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
-        self.label_5.setSizePolicy(sizePolicy3)
-        self.label_5.setFrameShape(QFrame.NoFrame)
+        self.label_image_preview = QLabel(self.tab_ros)
+        self.label_image_preview.setObjectName(u"label_image_preview")
+        self.label_image_preview.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout_2.addWidget(self.label_5, 1, 2, 1, 2)
-
-        self.button_chmod = QPushButton(self.tab_ros)
-        self.button_chmod.setObjectName(u"button_chmod")
-
-        self.gridLayout_2.addWidget(self.button_chmod, 1, 0, 1, 2)
-
-        self.button_save = QPushButton(self.tab_ros)
-        self.button_save.setObjectName(u"button_save")
-        sizePolicy4.setHeightForWidth(self.button_save.sizePolicy().hasHeightForWidth())
-        self.button_save.setSizePolicy(sizePolicy4)
-
-        self.gridLayout_2.addWidget(self.button_save, 2, 1, 1, 1)
-
-        self.button_preview = QPushButton(self.tab_ros)
-        self.button_preview.setObjectName(u"button_preview")
-        sizePolicy4.setHeightForWidth(self.button_preview.sizePolicy().hasHeightForWidth())
-        self.button_preview.setSizePolicy(sizePolicy4)
-
-        self.gridLayout_2.addWidget(self.button_preview, 3, 0, 2, 1)
-
-        self.button_end_preview = QPushButton(self.tab_ros)
-        self.button_end_preview.setObjectName(u"button_end_preview")
-        sizePolicy4.setHeightForWidth(self.button_end_preview.sizePolicy().hasHeightForWidth())
-        self.button_end_preview.setSizePolicy(sizePolicy4)
-
-        self.gridLayout_2.addWidget(self.button_end_preview, 3, 1, 2, 1)
+        self.gridLayout_2.addWidget(self.label_image_preview, 1, 2, 6, 1)
 
 
         self.verticalLayout_3.addLayout(self.gridLayout_2)
@@ -256,15 +274,19 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.gridLayout_3 = QGridLayout()
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.label_6 = QLabel(self.tab_analytics)
-        self.label_6.setObjectName(u"label_6")
-        sizePolicy5 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        sizePolicy5.setHorizontalStretch(1)
-        sizePolicy5.setVerticalStretch(0)
-        sizePolicy5.setHeightForWidth(self.label_6.sizePolicy().hasHeightForWidth())
-        self.label_6.setSizePolicy(sizePolicy5)
+        self.label_17 = QLabel(self.tab_analytics)
+        self.label_17.setObjectName(u"label_17")
 
-        self.gridLayout_3.addWidget(self.label_6, 0, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.label_17, 0, 2, 1, 1)
+
+        self.line_bag_name_check = QLineEdit(self.tab_analytics)
+        self.line_bag_name_check.setObjectName(u"line_bag_name_check")
+        self.line_bag_name_check.setStyleSheet(u"QLineEdit {\n"
+"	background: rgb(223, 223, 223)\n"
+"}")
+        self.line_bag_name_check.setReadOnly(True)
+
+        self.gridLayout_3.addWidget(self.line_bag_name_check, 0, 3, 1, 1)
 
         self.line_execution_status = QLineEdit(self.tab_analytics)
         self.line_execution_status.setObjectName(u"line_execution_status")
@@ -273,20 +295,22 @@ class Ui_MainWindow(object):
         sizePolicy6.setVerticalStretch(0)
         sizePolicy6.setHeightForWidth(self.line_execution_status.sizePolicy().hasHeightForWidth())
         self.line_execution_status.setSizePolicy(sizePolicy6)
+        self.line_execution_status.setStyleSheet(u"QLineEdit {\n"
+"	background: rgb(223, 223, 223)\n"
+"}")
         self.line_execution_status.setReadOnly(True)
 
         self.gridLayout_3.addWidget(self.line_execution_status, 0, 1, 1, 1)
 
-        self.line_bag_name_check = QLineEdit(self.tab_analytics)
-        self.line_bag_name_check.setObjectName(u"line_bag_name_check")
-        self.line_bag_name_check.setReadOnly(True)
+        self.label_6 = QLabel(self.tab_analytics)
+        self.label_6.setObjectName(u"label_6")
+        sizePolicy7 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy7.setHorizontalStretch(1)
+        sizePolicy7.setVerticalStretch(0)
+        sizePolicy7.setHeightForWidth(self.label_6.sizePolicy().hasHeightForWidth())
+        self.label_6.setSizePolicy(sizePolicy7)
 
-        self.gridLayout_3.addWidget(self.line_bag_name_check, 0, 3, 1, 1)
-
-        self.label_17 = QLabel(self.tab_analytics)
-        self.label_17.setObjectName(u"label_17")
-
-        self.gridLayout_3.addWidget(self.label_17, 0, 2, 1, 1)
+        self.gridLayout_3.addWidget(self.label_6, 0, 0, 1, 1)
 
 
         self.verticalLayout_6.addLayout(self.gridLayout_3)
@@ -298,75 +322,75 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4 = QGridLayout()
         self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.lineEdit_7 = QLineEdit(self.tab_analytics)
-        self.lineEdit_7.setObjectName(u"lineEdit_7")
+        self.line_lidar_topic = QLineEdit(self.tab_analytics)
+        self.line_lidar_topic.setObjectName(u"line_lidar_topic")
 
-        self.gridLayout_4.addWidget(self.lineEdit_7, 0, 3, 1, 1)
-
-        self.lineEdit_8 = QLineEdit(self.tab_analytics)
-        self.lineEdit_8.setObjectName(u"lineEdit_8")
-
-        self.gridLayout_4.addWidget(self.lineEdit_8, 1, 3, 1, 1)
-
-        self.label_16 = QLabel(self.tab_analytics)
-        self.label_16.setObjectName(u"label_16")
-
-        self.gridLayout_4.addWidget(self.label_16, 1, 4, 1, 1)
-
-        self.label_11 = QLabel(self.tab_analytics)
-        self.label_11.setObjectName(u"label_11")
-
-        self.gridLayout_4.addWidget(self.label_11, 1, 0, 1, 1)
-
-        self.label_15 = QLabel(self.tab_analytics)
-        self.label_15.setObjectName(u"label_15")
-
-        self.gridLayout_4.addWidget(self.label_15, 1, 2, 1, 1)
-
-        self.label_14 = QLabel(self.tab_analytics)
-        self.label_14.setObjectName(u"label_14")
-
-        self.gridLayout_4.addWidget(self.label_14, 0, 4, 1, 1)
-
-        self.line_image_freq = QLineEdit(self.tab_analytics)
-        self.line_image_freq.setObjectName(u"line_image_freq")
-
-        self.gridLayout_4.addWidget(self.line_image_freq, 1, 1, 1, 1)
-
-        self.line_image_size = QLineEdit(self.tab_analytics)
-        self.line_image_size.setObjectName(u"line_image_size")
-
-        self.gridLayout_4.addWidget(self.line_image_size, 2, 1, 1, 1)
-
-        self.line_image_topic = QLineEdit(self.tab_analytics)
-        self.line_image_topic.setObjectName(u"line_image_topic")
-
-        self.gridLayout_4.addWidget(self.line_image_topic, 0, 1, 1, 1)
-
-        self.label_12 = QLabel(self.tab_analytics)
-        self.label_12.setObjectName(u"label_12")
-
-        self.gridLayout_4.addWidget(self.label_12, 2, 0, 1, 1)
-
-        self.label_13 = QLabel(self.tab_analytics)
-        self.label_13.setObjectName(u"label_13")
-
-        self.gridLayout_4.addWidget(self.label_13, 0, 2, 1, 1)
+        self.gridLayout_4.addWidget(self.line_lidar_topic, 0, 3, 1, 1)
 
         self.label_10 = QLabel(self.tab_analytics)
         self.label_10.setObjectName(u"label_10")
 
         self.gridLayout_4.addWidget(self.label_10, 0, 0, 1, 1)
 
-        self.lineEdit_9 = QLineEdit(self.tab_analytics)
-        self.lineEdit_9.setObjectName(u"lineEdit_9")
+        self.line_image_topic = QLineEdit(self.tab_analytics)
+        self.line_image_topic.setObjectName(u"line_image_topic")
 
-        self.gridLayout_4.addWidget(self.lineEdit_9, 0, 5, 1, 1)
+        self.gridLayout_4.addWidget(self.line_image_topic, 0, 1, 1, 1)
 
-        self.lineEdit_10 = QLineEdit(self.tab_analytics)
-        self.lineEdit_10.setObjectName(u"lineEdit_10")
+        self.line_image_size = QLineEdit(self.tab_analytics)
+        self.line_image_size.setObjectName(u"line_image_size")
 
-        self.gridLayout_4.addWidget(self.lineEdit_10, 1, 5, 1, 1)
+        self.gridLayout_4.addWidget(self.line_image_size, 1, 1, 1, 1)
+
+        self.label_13 = QLabel(self.tab_analytics)
+        self.label_13.setObjectName(u"label_13")
+
+        self.gridLayout_4.addWidget(self.label_13, 0, 2, 1, 1)
+
+        self.line_imu_topic = QLineEdit(self.tab_analytics)
+        self.line_imu_topic.setObjectName(u"line_imu_topic")
+
+        self.gridLayout_4.addWidget(self.line_imu_topic, 0, 5, 1, 1)
+
+        self.label_12 = QLabel(self.tab_analytics)
+        self.label_12.setObjectName(u"label_12")
+
+        self.gridLayout_4.addWidget(self.label_12, 1, 0, 1, 1)
+
+        self.text_image_freq = QTextEdit(self.tab_analytics)
+        self.text_image_freq.setObjectName(u"text_image_freq")
+        self.text_image_freq.setMaximumSize(QSize(16777215, 16777215))
+        self.text_image_freq.setStyleSheet(u"QTextEdit {\n"
+"	background: rgb(223, 223, 223)\n"
+"}")
+        self.text_image_freq.setReadOnly(True)
+
+        self.gridLayout_4.addWidget(self.text_image_freq, 2, 0, 1, 2)
+
+        self.label_14 = QLabel(self.tab_analytics)
+        self.label_14.setObjectName(u"label_14")
+
+        self.gridLayout_4.addWidget(self.label_14, 0, 4, 1, 1)
+
+        self.text_lidar_freq = QTextEdit(self.tab_analytics)
+        self.text_lidar_freq.setObjectName(u"text_lidar_freq")
+        self.text_lidar_freq.setMaximumSize(QSize(16777215, 16777215))
+        self.text_lidar_freq.setStyleSheet(u"QTextEdit {\n"
+"	background: rgb(223, 223, 223)\n"
+"}")
+        self.text_lidar_freq.setReadOnly(True)
+
+        self.gridLayout_4.addWidget(self.text_lidar_freq, 2, 2, 1, 2)
+
+        self.text_imu_freq = QTextEdit(self.tab_analytics)
+        self.text_imu_freq.setObjectName(u"text_imu_freq")
+        self.text_imu_freq.setMaximumSize(QSize(16777215, 16777215))
+        self.text_imu_freq.setStyleSheet(u"QTextEdit {\n"
+"	background: rgb(223, 223, 223)\n"
+"}")
+        self.text_imu_freq.setReadOnly(True)
+
+        self.gridLayout_4.addWidget(self.text_imu_freq, 2, 4, 1, 2)
 
 
         self.verticalLayout_6.addLayout(self.gridLayout_4)
@@ -377,13 +401,22 @@ class Ui_MainWindow(object):
 
         self.text_log = QTextEdit(self.centralwidget)
         self.text_log.setObjectName(u"text_log")
+        sizePolicy8 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy8.setHorizontalStretch(0)
+        sizePolicy8.setVerticalStretch(1)
+        sizePolicy8.setHeightForWidth(self.text_log.sizePolicy().hasHeightForWidth())
+        self.text_log.setSizePolicy(sizePolicy8)
+        self.text_log.setStyleSheet(u"QTextEdit {\n"
+"	background: rgb(223, 223, 223)\n"
+"}")
+        self.text_log.setReadOnly(True)
 
         self.verticalLayout.addWidget(self.text_log)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 927, 20))
+        self.menubar.setGeometry(QRect(0, 0, 1131, 20))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -400,49 +433,48 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Remote Username", None))
-        self.line_user.setText(QCoreApplication.translate("MainWindow", u"abanesjo", None))
-        self.line_address.setText(QCoreApplication.translate("MainWindow", u"localhost", None))
+        self.line_user.setText(QCoreApplication.translate("MainWindow", u"ai4ce", None))
+        self.line_address.setText(QCoreApplication.translate("MainWindow", u"192.168.8.177", None))
         self.button_disconnect.setText(QCoreApplication.translate("MainWindow", u"Close Remote Connection", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Remote Password:", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Remote Address", None))
-        self.line_password.setText(QCoreApplication.translate("MainWindow", u"Pro0*290@", None))
+        self.line_password.setText(QCoreApplication.translate("MainWindow", u"12345678", None))
         self.button_connect.setText(QCoreApplication.translate("MainWindow", u"Connect to Remote", None))
         self.line_connection_status.setText(QCoreApplication.translate("MainWindow", u"Disconnected", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Connection Status:", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_remote), QCoreApplication.translate("MainWindow", u"Remote Connection", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"Catkin Workspace Path:", None))
-        self.line_workspace_path.setText(QCoreApplication.translate("MainWindow", u"/home/abanesjo/Desktop/catkin_ws", None))
+        self.line_workspace_path.setText(QCoreApplication.translate("MainWindow", u"/home/ai4ce/Desktop/catkin_ws", None))
+        self.line_bag_path.setText(QCoreApplication.translate("MainWindow", u"/mnt/internal/bag/bag_raw", None))
+        self.button_begin_recording.setText(QCoreApplication.translate("MainWindow", u"Begin Recording", None))
+        self.button_end_recording.setText(QCoreApplication.translate("MainWindow", u"End Recording", None))
+        self.button_chmod.setText(QCoreApplication.translate("MainWindow", u"Grant Port Permissions", None))
+        self.button_preview.setText(QCoreApplication.translate("MainWindow", u"Show Preview", None))
         self.line_bag_name.setText(QCoreApplication.translate("MainWindow", u"run1.bag", None))
-        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Bag File Path", None))
-        self.label_8.setText(QCoreApplication.translate("MainWindow", u"Bag File Name", None))
-        self.button_record.setText(QCoreApplication.translate("MainWindow", u"Begin Data Collection", None))
+        self.button_start.setText(QCoreApplication.translate("MainWindow", u"Start Sensors", None))
+        self.button_stop.setText(QCoreApplication.translate("MainWindow", u"Stop Sensors", None))
+        self.button_build_source.setText(QCoreApplication.translate("MainWindow", u"Build Workspace and Source", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Recording Parameters", None))
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Record to Bag File?", None))
         self.radio_record_true.setText(QCoreApplication.translate("MainWindow", u"True", None))
         self.radio_record__false.setText(QCoreApplication.translate("MainWindow", u"False", None))
-        self.button_build_source.setText(QCoreApplication.translate("MainWindow", u"Build Workspace and Source", None))
-        self.line_bag_path.setText(QCoreApplication.translate("MainWindow", u"/mnt/internal/bag/bag_raw", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Recording Parameters", None))
-        self.button_chmod.setText(QCoreApplication.translate("MainWindow", u"Grant Port Permissions", None))
-        self.button_save.setText(QCoreApplication.translate("MainWindow", u"Stop Data Collection", None))
-        self.button_preview.setText(QCoreApplication.translate("MainWindow", u"Show Preview", None))
-        self.button_end_preview.setText(QCoreApplication.translate("MainWindow", u"End Preview", None))
+        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Bag File Path", None))
+        self.label_8.setText(QCoreApplication.translate("MainWindow", u"Bag File Name", None))
+        self.label_image_preview.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_ros), QCoreApplication.translate("MainWindow", u"ROS", None))
-        self.label_6.setText(QCoreApplication.translate("MainWindow", u"Recording Status: ", None))
-        self.line_execution_status.setText(QCoreApplication.translate("MainWindow", u"Recording", None))
-        self.line_bag_name_check.setText(QCoreApplication.translate("MainWindow", u"run1.bag", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"Recording To: ", None))
+        self.line_bag_name_check.setText(QCoreApplication.translate("MainWindow", u"run1.bag", None))
+        self.line_execution_status.setText(QCoreApplication.translate("MainWindow", u"Recording", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"Recording Status: ", None))
         self.button_monitor.setText(QCoreApplication.translate("MainWindow", u"Monitor", None))
-        self.lineEdit_7.setText(QCoreApplication.translate("MainWindow", u"/livox/lidar", None))
-        self.label_16.setText(QCoreApplication.translate("MainWindow", u"Publishing Frequency: ", None))
-        self.label_11.setText(QCoreApplication.translate("MainWindow", u"Publishing Frequency: ", None))
-        self.label_15.setText(QCoreApplication.translate("MainWindow", u"Publishing Frequency:", None))
-        self.label_14.setText(QCoreApplication.translate("MainWindow", u"IMU Topic: ", None))
-        self.line_image_size.setText("")
-        self.line_image_topic.setText(QCoreApplication.translate("MainWindow", u"/front_camera_image/compressed", None))
-        self.label_12.setText(QCoreApplication.translate("MainWindow", u"Image Size:", None))
-        self.label_13.setText(QCoreApplication.translate("MainWindow", u"PointCloud topic:", None))
+        self.line_lidar_topic.setText(QCoreApplication.translate("MainWindow", u"/livox/lidar", None))
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"Image Topic: ", None))
-        self.lineEdit_9.setText(QCoreApplication.translate("MainWindow", u"/livox/imu", None))
+        self.line_image_topic.setText(QCoreApplication.translate("MainWindow", u"/front_camera_image/compressed", None))
+        self.line_image_size.setText("")
+        self.label_13.setText(QCoreApplication.translate("MainWindow", u"PointCloud topic:", None))
+        self.line_imu_topic.setText(QCoreApplication.translate("MainWindow", u"/livox/imu", None))
+        self.label_12.setText(QCoreApplication.translate("MainWindow", u"Image Size:", None))
+        self.label_14.setText(QCoreApplication.translate("MainWindow", u"IMU Topic: ", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_analytics), QCoreApplication.translate("MainWindow", u"Analytics", None))
     # retranslateUi
 
