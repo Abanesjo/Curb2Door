@@ -16,7 +16,8 @@ class TopicMonitor(QObject):
     
     def __init__(self, topic_name, message_type):
         super().__init__()
-        rospy.init_node("topic_monitor")
+        if not rospy.core.is_initialized():
+            rospy.init_node("gui", anonymous=True, disable_signals=True)
         self.topic_name = topic_name
         self.message_type = message_type
         self.last_time = None

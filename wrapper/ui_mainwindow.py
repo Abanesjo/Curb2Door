@@ -15,18 +15,18 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QGroupBox,
-    QHBoxLayout, QLabel, QLineEdit, QMainWindow,
-    QMenuBar, QPushButton, QRadioButton, QSizePolicy,
-    QStatusBar, QTabWidget, QTextEdit, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
+    QGroupBox, QHBoxLayout, QLabel, QLineEdit,
+    QMainWindow, QMenuBar, QPushButton, QRadioButton,
+    QSizePolicy, QStatusBar, QTabWidget, QTextEdit,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(1131, 600)
+        MainWindow.resize(1176, 552)
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -138,88 +138,30 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2 = QGridLayout()
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.line_bag_path = QLineEdit(self.tab_ros)
-        self.line_bag_path.setObjectName(u"line_bag_path")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.line_bag_path.sizePolicy().hasHeightForWidth())
-        self.line_bag_path.setSizePolicy(sizePolicy3)
-        self.line_bag_path.setMinimumSize(QSize(0, 0))
-        self.line_bag_path.setBaseSize(QSize(1, 0))
-
-        self.gridLayout_2.addWidget(self.line_bag_path, 5, 4, 1, 1)
-
         self.button_begin_recording = QPushButton(self.tab_ros)
         self.button_begin_recording.setObjectName(u"button_begin_recording")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.MinimumExpanding)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.button_begin_recording.sizePolicy().hasHeightForWidth())
+        self.button_begin_recording.setSizePolicy(sizePolicy3)
 
-        self.gridLayout_2.addWidget(self.button_begin_recording, 4, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.button_begin_recording, 5, 0, 1, 1)
 
         self.button_end_recording = QPushButton(self.tab_ros)
         self.button_end_recording.setObjectName(u"button_end_recording")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.MinimumExpanding)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.button_end_recording.sizePolicy().hasHeightForWidth())
-        self.button_end_recording.setSizePolicy(sizePolicy4)
+        sizePolicy3.setHeightForWidth(self.button_end_recording.sizePolicy().hasHeightForWidth())
+        self.button_end_recording.setSizePolicy(sizePolicy3)
 
-        self.gridLayout_2.addWidget(self.button_end_recording, 4, 1, 1, 1)
-
-        self.button_chmod = QPushButton(self.tab_ros)
-        self.button_chmod.setObjectName(u"button_chmod")
-
-        self.gridLayout_2.addWidget(self.button_chmod, 1, 0, 1, 2)
-
-        self.button_preview = QPushButton(self.tab_ros)
-        self.button_preview.setObjectName(u"button_preview")
-        sizePolicy4.setHeightForWidth(self.button_preview.sizePolicy().hasHeightForWidth())
-        self.button_preview.setSizePolicy(sizePolicy4)
-
-        self.gridLayout_2.addWidget(self.button_preview, 5, 0, 2, 2)
-
-        self.line_bag_name = QLineEdit(self.tab_ros)
-        self.line_bag_name.setObjectName(u"line_bag_name")
-        sizePolicy3.setHeightForWidth(self.line_bag_name.sizePolicy().hasHeightForWidth())
-        self.line_bag_name.setSizePolicy(sizePolicy3)
-
-        self.gridLayout_2.addWidget(self.line_bag_name, 6, 4, 1, 1)
-
-        self.button_start = QPushButton(self.tab_ros)
-        self.button_start.setObjectName(u"button_start")
-        sizePolicy4.setHeightForWidth(self.button_start.sizePolicy().hasHeightForWidth())
-        self.button_start.setSizePolicy(sizePolicy4)
-
-        self.gridLayout_2.addWidget(self.button_start, 2, 0, 1, 1)
-
-        self.button_stop = QPushButton(self.tab_ros)
-        self.button_stop.setObjectName(u"button_stop")
-        sizePolicy4.setHeightForWidth(self.button_stop.sizePolicy().hasHeightForWidth())
-        self.button_stop.setSizePolicy(sizePolicy4)
-
-        self.gridLayout_2.addWidget(self.button_stop, 2, 1, 1, 1)
-
-        self.button_build_source = QPushButton(self.tab_ros)
-        self.button_build_source.setObjectName(u"button_build_source")
-        sizePolicy3.setHeightForWidth(self.button_build_source.sizePolicy().hasHeightForWidth())
-        self.button_build_source.setSizePolicy(sizePolicy3)
-
-        self.gridLayout_2.addWidget(self.button_build_source, 0, 0, 1, 5)
-
-        self.label_5 = QLabel(self.tab_ros)
-        self.label_5.setObjectName(u"label_5")
-        sizePolicy3.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
-        self.label_5.setSizePolicy(sizePolicy3)
-        self.label_5.setFrameShape(QFrame.NoFrame)
-
-        self.gridLayout_2.addWidget(self.label_5, 1, 3, 1, 2)
+        self.gridLayout_2.addWidget(self.button_end_recording, 5, 1, 1, 1)
 
         self.groupBox = QGroupBox(self.tab_ros)
         self.groupBox.setObjectName(u"groupBox")
-        sizePolicy5 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-        sizePolicy5.setHorizontalStretch(0)
-        sizePolicy5.setVerticalStretch(0)
-        sizePolicy5.setHeightForWidth(self.groupBox.sizePolicy().hasHeightForWidth())
-        self.groupBox.setSizePolicy(sizePolicy5)
+        sizePolicy4 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.groupBox.sizePolicy().hasHeightForWidth())
+        self.groupBox.setSizePolicy(sizePolicy4)
         self.groupBox.setFlat(False)
         self.groupBox.setCheckable(False)
         self.verticalLayout_5 = QVBoxLayout(self.groupBox)
@@ -228,16 +170,16 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.radio_record_true = QRadioButton(self.groupBox)
         self.radio_record_true.setObjectName(u"radio_record_true")
-        sizePolicy5.setHeightForWidth(self.radio_record_true.sizePolicy().hasHeightForWidth())
-        self.radio_record_true.setSizePolicy(sizePolicy5)
+        sizePolicy4.setHeightForWidth(self.radio_record_true.sizePolicy().hasHeightForWidth())
+        self.radio_record_true.setSizePolicy(sizePolicy4)
         self.radio_record_true.setChecked(True)
 
         self.verticalLayout_4.addWidget(self.radio_record_true)
 
         self.radio_record__false = QRadioButton(self.groupBox)
         self.radio_record__false.setObjectName(u"radio_record__false")
-        sizePolicy5.setHeightForWidth(self.radio_record__false.sizePolicy().hasHeightForWidth())
-        self.radio_record__false.setSizePolicy(sizePolicy5)
+        sizePolicy4.setHeightForWidth(self.radio_record__false.sizePolicy().hasHeightForWidth())
+        self.radio_record__false.setSizePolicy(sizePolicy4)
         self.radio_record__false.setAutoFillBackground(False)
 
         self.verticalLayout_4.addWidget(self.radio_record__false)
@@ -248,21 +190,100 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.groupBox, 2, 3, 1, 2)
 
-        self.label_9 = QLabel(self.tab_ros)
-        self.label_9.setObjectName(u"label_9")
+        self.button_build_source = QPushButton(self.tab_ros)
+        self.button_build_source.setObjectName(u"button_build_source")
+        sizePolicy5 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.button_build_source.sizePolicy().hasHeightForWidth())
+        self.button_build_source.setSizePolicy(sizePolicy5)
 
-        self.gridLayout_2.addWidget(self.label_9, 5, 3, 1, 1)
+        self.gridLayout_2.addWidget(self.button_build_source, 0, 0, 1, 5)
+
+        self.button_chmod = QPushButton(self.tab_ros)
+        self.button_chmod.setObjectName(u"button_chmod")
+
+        self.gridLayout_2.addWidget(self.button_chmod, 1, 0, 1, 2)
+
+        self.button_stop = QPushButton(self.tab_ros)
+        self.button_stop.setObjectName(u"button_stop")
+        sizePolicy3.setHeightForWidth(self.button_stop.sizePolicy().hasHeightForWidth())
+        self.button_stop.setSizePolicy(sizePolicy3)
+
+        self.gridLayout_2.addWidget(self.button_stop, 2, 1, 1, 1)
+
+        self.line_bag_path = QLineEdit(self.tab_ros)
+        self.line_bag_path.setObjectName(u"line_bag_path")
+        sizePolicy5.setHeightForWidth(self.line_bag_path.sizePolicy().hasHeightForWidth())
+        self.line_bag_path.setSizePolicy(sizePolicy5)
+        self.line_bag_path.setMinimumSize(QSize(0, 0))
+        self.line_bag_path.setBaseSize(QSize(1, 0))
+
+        self.gridLayout_2.addWidget(self.line_bag_path, 5, 4, 1, 1)
+
+        self.button_preview = QPushButton(self.tab_ros)
+        self.button_preview.setObjectName(u"button_preview")
+        sizePolicy3.setHeightForWidth(self.button_preview.sizePolicy().hasHeightForWidth())
+        self.button_preview.setSizePolicy(sizePolicy3)
+
+        self.gridLayout_2.addWidget(self.button_preview, 6, 0, 1, 1)
 
         self.label_8 = QLabel(self.tab_ros)
         self.label_8.setObjectName(u"label_8")
 
         self.gridLayout_2.addWidget(self.label_8, 6, 3, 1, 1)
 
+        self.button_end_preview = QPushButton(self.tab_ros)
+        self.button_end_preview.setObjectName(u"button_end_preview")
+        sizePolicy3.setHeightForWidth(self.button_end_preview.sizePolicy().hasHeightForWidth())
+        self.button_end_preview.setSizePolicy(sizePolicy3)
+
+        self.gridLayout_2.addWidget(self.button_end_preview, 6, 1, 1, 1)
+
+        self.label_5 = QLabel(self.tab_ros)
+        self.label_5.setObjectName(u"label_5")
+        sizePolicy5.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
+        self.label_5.setSizePolicy(sizePolicy5)
+        self.label_5.setFrameShape(QFrame.NoFrame)
+
+        self.gridLayout_2.addWidget(self.label_5, 1, 3, 1, 2)
+
+        self.line_bag_name = QLineEdit(self.tab_ros)
+        self.line_bag_name.setObjectName(u"line_bag_name")
+        sizePolicy5.setHeightForWidth(self.line_bag_name.sizePolicy().hasHeightForWidth())
+        self.line_bag_name.setSizePolicy(sizePolicy5)
+
+        self.gridLayout_2.addWidget(self.line_bag_name, 6, 4, 1, 1)
+
+        self.button_start = QPushButton(self.tab_ros)
+        self.button_start.setObjectName(u"button_start")
+        sizePolicy3.setHeightForWidth(self.button_start.sizePolicy().hasHeightForWidth())
+        self.button_start.setSizePolicy(sizePolicy3)
+
+        self.gridLayout_2.addWidget(self.button_start, 2, 0, 1, 1)
+
+        self.label_9 = QLabel(self.tab_ros)
+        self.label_9.setObjectName(u"label_9")
+
+        self.gridLayout_2.addWidget(self.label_9, 5, 3, 1, 1)
+
         self.label_image_preview = QLabel(self.tab_ros)
         self.label_image_preview.setObjectName(u"label_image_preview")
+        sizePolicy.setHeightForWidth(self.label_image_preview.sizePolicy().hasHeightForWidth())
+        self.label_image_preview.setSizePolicy(sizePolicy)
+        self.label_image_preview.setMinimumSize(QSize(200, 200))
+        self.label_image_preview.setMaximumSize(QSize(250, 250))
+        self.label_image_preview.setBaseSize(QSize(30, 0))
         self.label_image_preview.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout_2.addWidget(self.label_image_preview, 1, 2, 6, 1)
+        self.gridLayout_2.addWidget(self.label_image_preview, 2, 2, 5, 1)
+
+        self.comboBox = QComboBox(self.tab_ros)
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.setObjectName(u"comboBox")
+
+        self.gridLayout_2.addWidget(self.comboBox, 1, 2, 1, 1)
 
 
         self.verticalLayout_3.addLayout(self.gridLayout_2)
@@ -416,7 +437,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1131, 20))
+        self.menubar.setGeometry(QRect(0, 0, 1176, 20))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -425,6 +446,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.tabWidget.setCurrentIndex(0)
+        self.comboBox.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -445,22 +467,26 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_remote), QCoreApplication.translate("MainWindow", u"Remote Connection", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"Catkin Workspace Path:", None))
         self.line_workspace_path.setText(QCoreApplication.translate("MainWindow", u"/home/ai4ce/Desktop/catkin_ws", None))
-        self.line_bag_path.setText(QCoreApplication.translate("MainWindow", u"/mnt/internal/bag/bag_raw", None))
         self.button_begin_recording.setText(QCoreApplication.translate("MainWindow", u"Begin Recording", None))
         self.button_end_recording.setText(QCoreApplication.translate("MainWindow", u"End Recording", None))
-        self.button_chmod.setText(QCoreApplication.translate("MainWindow", u"Grant Port Permissions", None))
-        self.button_preview.setText(QCoreApplication.translate("MainWindow", u"Show Preview", None))
-        self.line_bag_name.setText(QCoreApplication.translate("MainWindow", u"run1.bag", None))
-        self.button_start.setText(QCoreApplication.translate("MainWindow", u"Start Sensors", None))
-        self.button_stop.setText(QCoreApplication.translate("MainWindow", u"Stop Sensors", None))
-        self.button_build_source.setText(QCoreApplication.translate("MainWindow", u"Build Workspace and Source", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Recording Parameters", None))
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Record to Bag File?", None))
         self.radio_record_true.setText(QCoreApplication.translate("MainWindow", u"True", None))
         self.radio_record__false.setText(QCoreApplication.translate("MainWindow", u"False", None))
-        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Bag File Path", None))
+        self.button_build_source.setText(QCoreApplication.translate("MainWindow", u"Build Workspace and Source", None))
+        self.button_chmod.setText(QCoreApplication.translate("MainWindow", u"Grant Port Permissions", None))
+        self.button_stop.setText(QCoreApplication.translate("MainWindow", u"Stop Sensors", None))
+        self.line_bag_path.setText(QCoreApplication.translate("MainWindow", u"/mnt/internal/bag/bag_raw", None))
+        self.button_preview.setText(QCoreApplication.translate("MainWindow", u"Show Preview", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"Bag File Name", None))
+        self.button_end_preview.setText(QCoreApplication.translate("MainWindow", u"End Preview", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Recording Parameters", None))
+        self.line_bag_name.setText(QCoreApplication.translate("MainWindow", u"run1.bag", None))
+        self.button_start.setText(QCoreApplication.translate("MainWindow", u"Start Sensors", None))
+        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Bag File Path", None))
         self.label_image_preview.setText("")
+        self.comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Front Camera", None))
+        self.comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"Back Camera", None))
+
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_ros), QCoreApplication.translate("MainWindow", u"ROS", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"Recording To: ", None))
         self.line_bag_name_check.setText(QCoreApplication.translate("MainWindow", u"run1.bag", None))

@@ -1,5 +1,6 @@
-from PySide6.QtCore import QTimer, Signal
+from PySide6.QtCore import QTimer, Signal, Slot, Qt
 from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox
+from PySide6.QtGui import QPixmap, QImage
 from ui_mainwindow import Ui_MainWindow
 from topic_monitor import TopicMonitor
 
@@ -8,18 +9,21 @@ import subprocess
 import threading
 import os
 import re
-
+import numpy as np
+import cv2
+import rospy
 from sensor_msgs.msg import CompressedImage
 
 def clean_ansi_sequences(text):
     ansi_escape = re.compile(r'''
         \x1B[@-_][0-?]*[ -/]*[@-~]  # ANSI escape sequences
     ''', re.VERBOSE)
-
     return ansi_escape.sub('', text)
 
 class MainWindow(QMainWindow, Ui_MainWindow):
+    new_image_signal = Signal(np.ndarray)
     append_text_signal = Signal(str, object)
+
     def __init__(self, app):
         super().__init__()
         self.setupUi(self)
@@ -39,13 +43,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.button_start.clicked.connect(self.start_sensors)
         self.button_stop.clicked.connect(self.stop_sensors)
         self.button_preview.clicked.connect(self.preview)
+        self.button_end_preview.clicked.connect(self.end_preview)
         self.button_monitor.clicked.connect(self.monitor)
 
         self.workspace_path = ""
         self.setup = ""
         self.update_workspace_path()
-
+        
+        self.new_image_signal.connect(self.setImage)
         self.append_text_signal.connect(self.append_text)
+
+        # Set initial black image
+        self.set_black_image()
 
     def __del__(self):
         print("Disconnecting from the robot")
@@ -58,6 +67,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def append_text(self, text, text_widget):
         text_widget.append(text)
+
+    def set_black_image(self):
+        height, width = self.label_image_preview.size().height(), self.label_image_preview.size().width()
+        black_image = np.zeros((height, width, 3), dtype=np.uint8)
+        q_img = QImage(black_image.data, width, height, 3 * width, QImage.Format_RGB888)
+        pixmap = QPixmap.fromImage(q_img)
+        self.label_image_preview.setPixmap(pixmap)
 
     def execute_local(self, command):
         self.text_log.append(f"(Local) {command}")
@@ -165,8 +181,32 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def preview(self):
         self.text_log.append("Opening Preview (Local)...")
-        # set_uri = f"""export ROS_MASTER_URI="http://{self.address}:11311" """
-        self.execute_local(f"rqt_image_view /front_camera_image/compressed")
+        if not rospy.core.is_initialized():
+            rospy.init_node("gui", anonymous=True, disable_signals=True)
+        self.image_subscriber = rospy.Subscriber("/front_camera_image/compressed", CompressedImage, self.image_callback)
+
+    def end_preview(self):
+        self.text_log.append("Ending Preview (Local)...")
+        if hasattr(self, 'image_subscriber'):
+            self.image_subscriber.unregister()
+            del self.image_subscriber
+        self.set_black_image()
+
+    def image_callback(self, msg):
+        np_arr = np.frombuffer(msg.data, np.uint8)
+        cv_image = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+        cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
+        self.new_image_signal.emit(cv_image)
+
+    @Slot(np.ndarray)
+    def setImage(self, cv_image):
+        height, width, channel = cv_image.shape
+        bytes_per_line = 3 * width
+        q_img = QImage(cv_image.data, width, height, bytes_per_line, QImage.Format_RGB888)
+        pixmap = QPixmap.fromImage(q_img)
+        
+        scaled_pixmap = pixmap.scaled(self.label_image_preview.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        self.label_image_preview.setPixmap(scaled_pixmap)
 
     def monitor(self):
         self.text_log.append("Begin monitoring topics")
@@ -185,7 +225,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         imu_topic = self.line_imu_topic.text()
         self.execute_and_print(f"{self.setup} && rostopic hz {imu_topic}", self.text_imu_freq)
 
-        
     def update_image_shape(self, width, height):
         self.line_image_size.setText(f"({width}, {height})")
 
