@@ -278,12 +278,12 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.label_image_preview, 2, 2, 5, 1)
 
-        self.comboBox = QComboBox(self.tab_ros)
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.setObjectName(u"comboBox")
+        self.combo_image_topic = QComboBox(self.tab_ros)
+        self.combo_image_topic.addItem("")
+        self.combo_image_topic.addItem("")
+        self.combo_image_topic.setObjectName(u"combo_image_topic")
 
-        self.gridLayout_2.addWidget(self.comboBox, 1, 2, 1, 1)
+        self.gridLayout_2.addWidget(self.combo_image_topic, 1, 2, 1, 1)
 
 
         self.verticalLayout_3.addLayout(self.gridLayout_2)
@@ -446,7 +446,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.tabWidget.setCurrentIndex(0)
-        self.comboBox.setCurrentIndex(0)
+        self.combo_image_topic.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -484,8 +484,8 @@ class Ui_MainWindow(object):
         self.button_start.setText(QCoreApplication.translate("MainWindow", u"Start Sensors", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"Bag File Path", None))
         self.label_image_preview.setText("")
-        self.comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Front Camera", None))
-        self.comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"Back Camera", None))
+        self.combo_image_topic.setItemText(0, QCoreApplication.translate("MainWindow", u"Front Camera", None))
+        self.combo_image_topic.setItemText(1, QCoreApplication.translate("MainWindow", u"Back Camera", None))
 
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_ros), QCoreApplication.translate("MainWindow", u"ROS", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"Recording To: ", None))

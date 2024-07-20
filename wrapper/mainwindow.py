@@ -43,6 +43,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.button_start.clicked.connect(self.start_sensors)
         self.button_stop.clicked.connect(self.stop_sensors)
         self.button_preview.clicked.connect(self.preview)
+        self.combo_image_topic.currentIndexChanged.connect(self.update_preview)
         self.button_end_preview.clicked.connect(self.end_preview)
         self.button_monitor.clicked.connect(self.monitor)
 
@@ -181,9 +182,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def preview(self):
         self.text_log.append("Opening Preview (Local)...")
+        self.update_preview()
+    
+    def update_preview(self):
         if not rospy.core.is_initialized():
             rospy.init_node("gui", anonymous=True, disable_signals=True)
-        self.image_subscriber = rospy.Subscriber("/front_camera_image/compressed", CompressedImage, self.image_callback)
+        try:
+            self.image_subscriber.unregister()
+        except Exception as e:
+            pass
+
+        if self.combo_image_topic.currentIndex() == 0:
+            image_topic = "/front_camera_image/compressed"
+        elif self.combo_image_topic.currentIndex() == 1:
+            image_topic = "/back_camera_image/compressed"
+        else:
+            print("Invalid Index")
+            return
+        
+        self.image_subscriber = rospy.Subscriber(image_topic, CompressedImage, self.image_callback)
 
     def end_preview(self):
         self.text_log.append("Ending Preview (Local)...")
