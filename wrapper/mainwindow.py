@@ -23,6 +23,7 @@ def clean_ansi_sequences(text):
 class MainWindow(QMainWindow, Ui_MainWindow):
     new_image_signal = Signal(np.ndarray)
     append_text_signal = Signal(str, object)
+    dimension_signal = Signal(int, int)
 
     def __init__(self, app):
         super().__init__()
@@ -53,6 +54,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         self.new_image_signal.connect(self.setImage)
         self.append_text_signal.connect(self.append_text)
+        self.dimension_signal.connect(self.update_image_shape)
+
+        self.rostopic_processes = {}
 
         # Set initial black image
         self.set_black_image()
@@ -62,9 +66,24 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.SSH.close()
 
     def closeEvent(self, event):
-        # Perform any cleanup before the window closes
+    # Perform any cleanup before the window closes
         self.ssh_disconnect()  # Close SSH connections if open
-        super().closeEvent(event)  
+
+        # Close any active ROS subscribers
+        if hasattr(self, 'image_subscriber'):
+            self.image_subscriber.unregister()
+        
+        # Stop any active rostopic processes
+        sessions_to_close = list(self.rostopic_processes.values())
+        for session in sessions_to_close:
+            session.close()
+        self.rostopic_processes.clear()
+
+        # Shutdown ROS node
+        if rospy.core.is_initialized():
+            rospy.signal_shutdown('GUI closing')
+
+        super().closeEvent(event)
 
     def append_text(self, text, text_widget):
         text_widget.append(text)
@@ -173,12 +192,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def start_sensors(self):
         self.update_workspace_path()
+        self.text_log.append("Starting Sensors...")
         self.SSH.exec_command(f"{self.setup} && roslaunch insta360_ros_driver live_process.launch")
         self.execute_and_print(f'{self.setup} && echo "Live Topics:\n" && rostopic list', self.text_log)
 
     def stop_sensors(self):
         self.update_workspace_path()
-        self.SSH.exec_command(f"{self.setup} && rosnode kill /live_processing /raw_output")
+        self.text_log.append("Stoping Sensors...")
+        # self.SSH.exec_command(f"{self.setup} && rosnode kill /live_processing /raw_output")
+        self.SSH.exec_command("pkill -f ros")
+        self.set_black_image()
 
     def preview(self):
         self.text_log.append("Opening Preview (Local)...")
@@ -214,6 +237,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         cv_image = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
         cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
         self.new_image_signal.emit(cv_image)
+        self.dimension_signal.emit(cv_image.shape[1], cv_image.shape[0])  # Emit dimension signal
 
     @Slot(np.ndarray)
     def setImage(self, cv_image):
@@ -227,31 +251,52 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def monitor(self):
         self.text_log.append("Begin monitoring topics")
+
+        # Stop any existing rostopic commands
+        sessions_to_close = list(self.rostopic_processes.values())
+        for session in sessions_to_close:
+            session.close()
+        self.rostopic_processes.clear()
+
+        # Clear the text boxes
+        self.text_image_freq.clear()
+        self.text_lidar_freq.clear()
+        self.text_imu_freq.clear()
+        self.line_image_size.clear()
+
+        # Start new monitor commands
         image_topic = self.line_image_topic.text()
-        self.image_monitor = TopicMonitor(image_topic, CompressedImage)
-        self.image_monitor.dimension_signal.connect(self.update_image_shape)
+        self.execute_and_print(f"{self.setup} && rostopic hz {image_topic}", self.text_image_freq, command_id="image")
 
-        #Image Frequency
-        self.execute_and_print(f"{self.setup} && rostopic hz {image_topic}", self.text_image_freq)
-
-        #LiDAR Frequency
         lidar_topic = self.line_lidar_topic.text()
-        self.execute_and_print(f"{self.setup} && rostopic hz {lidar_topic}", self.text_lidar_freq)
+        self.execute_and_print(f"{self.setup} && rostopic hz {lidar_topic}", self.text_lidar_freq, command_id="lidar")
 
-        #IMU Frequency
         imu_topic = self.line_imu_topic.text()
-        self.execute_and_print(f"{self.setup} && rostopic hz {imu_topic}", self.text_imu_freq)
+        self.execute_and_print(f"{self.setup} && rostopic hz {imu_topic}", self.text_imu_freq, command_id="imu")
+
+        # Initialize ROS node if not already initialized
+        if not rospy.core.is_initialized():
+            rospy.init_node("gui_monitor", anonymous=True, disable_signals=True)
+
+        # Create the subscriber for the image topic to get the image dimensions
+        if hasattr(self, 'image_subscriber'):
+            self.image_subscriber.unregister()
+        self.image_subscriber = rospy.Subscriber(image_topic, CompressedImage, self.image_callback)
 
     def update_image_shape(self, width, height):
         self.line_image_size.setText(f"({width}, {height})")
 
-    def execute_and_print(self, command, text_widget):
+    def execute_and_print(self, command, text_widget, command_id=None):
         def run_command():
             ssh = self.SSH
             try:
                 session = ssh.get_transport().open_session()
                 session.get_pty()
                 session.exec_command(command)
+
+                # Store the session to allow it to be closed later
+                if command_id:
+                    self.rostopic_processes[command_id] = session
 
                 while True:
                     line = session.recv(1024).decode('utf-8')

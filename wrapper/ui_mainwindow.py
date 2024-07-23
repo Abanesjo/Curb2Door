@@ -309,19 +309,19 @@ class Ui_MainWindow(object):
 
         self.gridLayout_3.addWidget(self.line_bag_name_check, 0, 3, 1, 1)
 
-        self.line_execution_status = QLineEdit(self.tab_analytics)
-        self.line_execution_status.setObjectName(u"line_execution_status")
+        self.line_record_status = QLineEdit(self.tab_analytics)
+        self.line_record_status.setObjectName(u"line_record_status")
         sizePolicy6 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         sizePolicy6.setHorizontalStretch(1)
         sizePolicy6.setVerticalStretch(0)
-        sizePolicy6.setHeightForWidth(self.line_execution_status.sizePolicy().hasHeightForWidth())
-        self.line_execution_status.setSizePolicy(sizePolicy6)
-        self.line_execution_status.setStyleSheet(u"QLineEdit {\n"
+        sizePolicy6.setHeightForWidth(self.line_record_status.sizePolicy().hasHeightForWidth())
+        self.line_record_status.setSizePolicy(sizePolicy6)
+        self.line_record_status.setStyleSheet(u"QLineEdit {\n"
 "	background: rgb(223, 223, 223)\n"
 "}")
-        self.line_execution_status.setReadOnly(True)
+        self.line_record_status.setReadOnly(True)
 
-        self.gridLayout_3.addWidget(self.line_execution_status, 0, 1, 1, 1)
+        self.gridLayout_3.addWidget(self.line_record_status, 0, 1, 1, 1)
 
         self.label_6 = QLabel(self.tab_analytics)
         self.label_6.setObjectName(u"label_6")
@@ -456,7 +456,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Remote Username", None))
         self.line_user.setText(QCoreApplication.translate("MainWindow", u"ai4ce", None))
-        self.line_address.setText(QCoreApplication.translate("MainWindow", u"192.168.8.177", None))
+        self.line_address.setText(QCoreApplication.translate("MainWindow", u"192.168.8.169", None))
         self.button_disconnect.setText(QCoreApplication.translate("MainWindow", u"Close Remote Connection", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Remote Password:", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Remote Address", None))
@@ -475,7 +475,7 @@ class Ui_MainWindow(object):
         self.button_build_source.setText(QCoreApplication.translate("MainWindow", u"Build Workspace and Source", None))
         self.button_chmod.setText(QCoreApplication.translate("MainWindow", u"Grant Port Permissions", None))
         self.button_stop.setText(QCoreApplication.translate("MainWindow", u"Stop Sensors", None))
-        self.line_bag_path.setText(QCoreApplication.translate("MainWindow", u"/mnt/internal/bag/bag_raw", None))
+        self.line_bag_path.setText(QCoreApplication.translate("MainWindow", u"/home/ai4ce/Desktop/bag", None))
         self.button_preview.setText(QCoreApplication.translate("MainWindow", u"Show Preview", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"Bag File Name", None))
         self.button_end_preview.setText(QCoreApplication.translate("MainWindow", u"End Preview", None))
@@ -490,7 +490,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_ros), QCoreApplication.translate("MainWindow", u"ROS", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"Recording To: ", None))
         self.line_bag_name_check.setText(QCoreApplication.translate("MainWindow", u"run1.bag", None))
-        self.line_execution_status.setText(QCoreApplication.translate("MainWindow", u"Recording", None))
+        self.line_record_status.setText(QCoreApplication.translate("MainWindow", u"Recording", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Recording Status: ", None))
         self.button_monitor.setText(QCoreApplication.translate("MainWindow", u"Monitor", None))
         self.line_lidar_topic.setText(QCoreApplication.translate("MainWindow", u"/livox/lidar", None))
