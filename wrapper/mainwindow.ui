@@ -168,7 +168,7 @@
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>/home/ai4ce/Desktop/catkin_ws</string>
+             <string>/mnt/internal/catkin_ws</string>
             </property>
            </widget>
           </item>

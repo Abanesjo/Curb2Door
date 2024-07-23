@@ -46,6 +46,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.button_preview.clicked.connect(self.preview)
         self.combo_image_topic.currentIndexChanged.connect(self.update_preview)
         self.button_end_preview.clicked.connect(self.end_preview)
+        self.button_begin_recording(self.begin_recording)
+        self.button_end_recording(self.end_recording)
         self.button_monitor.clicked.connect(self.monitor)
 
         self.workspace_path = ""
@@ -118,6 +120,42 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         thread = threading.Thread(target=run_command)
         thread.daemon = True
+        thread.start()
+
+    def execute_and_print(self, command, text_widget, command_id=None):
+        def run_command():
+            ssh = self.SSH
+            try:
+                session = ssh.get_transport().open_session()
+                session.get_pty()
+                session.exec_command(command)
+
+                # Store the session to allow it to be closed later
+                if command_id:
+                    self.rostopic_processes[command_id] = session
+
+                while True:
+                    line = session.recv(1024).decode('utf-8')
+                    if not line:
+                        break
+                    cleaned_line = clean_ansi_sequences(line.strip())
+                    self.append_text_signal.emit(cleaned_line, text_widget)
+
+                while True:
+                    line = session.recv_stderr(1024).decode('utf-8')
+                    if not line:
+                        break
+                    cleaned_line = clean_ansi_sequences(line.strip())
+                    self.append_text_signal.emit(cleaned_line, text_widget)
+
+            except Exception as e:
+                error_message = f"Error executing command: {str(e)}"
+                self.append_text_signal.emit(error_message, text_widget)
+
+            self.append_text_signal.emit("------------------------------------------------", text_widget)
+
+        thread = threading.Thread(target=run_command)
+        thread.daemon = True        
         thread.start()
 
     def execute_sudo_command(self, command):
@@ -193,7 +231,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def start_sensors(self):
         self.update_workspace_path()
         self.text_log.append("Starting Sensors...")
-        self.SSH.exec_command(f"{self.setup} && roslaunch insta360_ros_driver live_process.launch")
+        self.SSH.exec_command(f"{self.setup} && roslaunch curb2door bringup.launch")
         self.execute_and_print(f'{self.setup} && echo "Live Topics:\n" && rostopic list', self.text_log)
 
     def stop_sensors(self):
@@ -249,6 +287,22 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         scaled_pixmap = pixmap.scaled(self.label_image_preview.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
         self.label_image_preview.setPixmap(scaled_pixmap)
 
+    def begin_recording(self):
+        self.update_workspace_path()
+        bag_path = self.line_bag_path.text()
+        bag_name = self.line_bag_name.text()
+        self.text_log.append(f"Recording to {bag_path}/{bag_name}")
+        self.SSH.exec_command(f"{self.setup} && roslaunch curb2door record.launch bag_path:={bag_path} bag_name:={bag_name}")
+        self.line_record_status.setText("Recording")
+        self.line_bag_name_check.setText(bag_name)
+
+    def end_recording(self):
+        self.update_workspace_path()
+        self.text_log.append("Ending Recording...")
+        self.SSH.exec_command(f"{self.setup} && rosnode kill /rosbag")
+        self.line_record_status.setText("Not Recording")
+        self.line_bag_name_check.clear()     
+
     def monitor(self):
         self.text_log.append("Begin monitoring topics")
 
@@ -286,38 +340,4 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def update_image_shape(self, width, height):
         self.line_image_size.setText(f"({width}, {height})")
 
-    def execute_and_print(self, command, text_widget, command_id=None):
-        def run_command():
-            ssh = self.SSH
-            try:
-                session = ssh.get_transport().open_session()
-                session.get_pty()
-                session.exec_command(command)
-
-                # Store the session to allow it to be closed later
-                if command_id:
-                    self.rostopic_processes[command_id] = session
-
-                while True:
-                    line = session.recv(1024).decode('utf-8')
-                    if not line:
-                        break
-                    cleaned_line = clean_ansi_sequences(line.strip())
-                    self.append_text_signal.emit(cleaned_line, text_widget)
-
-                while True:
-                    line = session.recv_stderr(1024).decode('utf-8')
-                    if not line:
-                        break
-                    cleaned_line = clean_ansi_sequences(line.strip())
-                    self.append_text_signal.emit(cleaned_line, text_widget)
-
-            except Exception as e:
-                error_message = f"Error executing command: {str(e)}"
-                self.append_text_signal.emit(error_message, text_widget)
-
-            self.append_text_signal.emit("------------------------------------------------", text_widget)
-
-        thread = threading.Thread(target=run_command)
-        thread.daemon = True        
-        thread.start()
+    

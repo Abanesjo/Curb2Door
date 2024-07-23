@@ -466,7 +466,7 @@ class Ui_MainWindow(object):
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Connection Status:", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_remote), QCoreApplication.translate("MainWindow", u"Remote Connection", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"Catkin Workspace Path:", None))
-        self.line_workspace_path.setText(QCoreApplication.translate("MainWindow", u"/home/ai4ce/Desktop/catkin_ws", None))
+        self.line_workspace_path.setText(QCoreApplication.translate("MainWindow", u"/mnt/internal/catkin_ws", None))
         self.button_begin_recording.setText(QCoreApplication.translate("MainWindow", u"Begin Recording", None))
         self.button_end_recording.setText(QCoreApplication.translate("MainWindow", u"End Recording", None))
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Record to Bag File?", None))
