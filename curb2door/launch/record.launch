@@ -3,5 +3,5 @@
     <arg name="bag_path" default="$(find curb2door)/bag_raw"/>
 	<arg name="bag_name" default="run.bag"/>
 
-    <node if="$(arg record)" name="rosbag" pkg="rosbag" type="record" args="-O $(arg bag_path)/$(arg bag_name) /livox/lidar /livox/imu /front_camera_image/compressed /back_camera_image/compressed" output="screen"/>
+    <node name="rosbag" pkg="rosbag" type="record" args="-O $(arg bag_path)/$(arg bag_name) /livox/lidar /livox/imu /front_camera_image/compressed /back_camera_image/compressed" output="screen"/>
 </launch>

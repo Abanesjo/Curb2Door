@@ -211,7 +211,7 @@
              </sizepolicy>
             </property>
             <property name="title">
-             <string>Record to Bag File?</string>
+             <string>PointCloud Format</string>
             </property>
             <property name="flat">
              <bool>false</bool>
@@ -231,7 +231,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>True</string>
+                  <string>Livox Custom Msg</string>
                  </property>
                  <property name="checked">
                   <bool>true</bool>
@@ -250,7 +250,7 @@
                   <bool>false</bool>
                  </property>
                  <property name="text">
-                  <string>False</string>
+                  <string>PointCloud2</string>
                  </property>
                 </widget>
                </item>
@@ -313,7 +313,7 @@
              </size>
             </property>
             <property name="text">
-             <string>/home/ai4ce/Desktop/bag</string>
+             <string>/mnt/internal/bag</string>
             </property>
            </widget>
           </item>

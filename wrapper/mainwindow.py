@@ -232,7 +232,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.update_workspace_path()
         self.text_log.append("Starting Sensors...")
         self.SSH.exec_command(f"{self.setup} && roslaunch curb2door bringup.launch")
-        self.execute_and_print(f'{self.setup} && echo "Live Topics:\n" && rostopic list', self.text_log)
+        QTimer.singleShot(5000, lambda: self.execute_and_print(f'{self.setup} && echo "Live Topics:\n" && rostopic list', self.text_log))
 
     def stop_sensors(self):
         self.update_workspace_path()
