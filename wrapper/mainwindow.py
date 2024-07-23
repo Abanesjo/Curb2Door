@@ -46,8 +46,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.button_preview.clicked.connect(self.preview)
         self.combo_image_topic.currentIndexChanged.connect(self.update_preview)
         self.button_end_preview.clicked.connect(self.end_preview)
-        self.button_begin_recording(self.begin_recording)
-        self.button_end_recording(self.end_recording)
+        self.button_begin_recording.clicked.connect(self.begin_recording)
+        self.button_end_recording.clicked.connect(self.end_recording)
         self.button_monitor.clicked.connect(self.monitor)
 
         self.workspace_path = ""
