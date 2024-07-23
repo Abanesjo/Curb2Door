@@ -65,10 +65,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def __del__(self):
         print("Disconnecting from the robot")
+        self.stop_sensors()
         self.SSH.close()
 
     def closeEvent(self, event):
     # Perform any cleanup before the window closes
+        self.stop_sensors()
         self.ssh_disconnect()  # Close SSH connections if open
 
         # Close any active ROS subscribers
@@ -230,8 +232,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def start_sensors(self):
         self.update_workspace_path()
-        self.text_log.append("Starting Sensors...")
-        self.SSH.exec_command(f"{self.setup} && roslaunch curb2door bringup.launch")
+        self.text_log.append("Starting Sensors... (~5s)")
+
+        if self.radio_custom_msg.isChecked():
+            lidar_msg = "CustomMsg"
+        else:
+            lidar_msg = "PointCloud2"
+
+        self.text_log.append(f"Lidar Mode: {lidar_msg}")
+        self.SSH.exec_command(f"{self.setup} && roslaunch curb2door bringup.launch lidar_msg:={lidar_msg}")
         QTimer.singleShot(5000, lambda: self.execute_and_print(f'{self.setup} && echo "Live Topics:\n" && rostopic list', self.text_log))
 
     def stop_sensors(self):
@@ -291,6 +300,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.update_workspace_path()
         bag_path = self.line_bag_path.text()
         bag_name = self.line_bag_name.text()
+
         self.text_log.append(f"Recording to {bag_path}/{bag_name}")
         self.SSH.exec_command(f"{self.setup} && roslaunch curb2door record.launch bag_path:={bag_path} bag_name:={bag_name}")
         self.line_record_status.setText("Recording")
