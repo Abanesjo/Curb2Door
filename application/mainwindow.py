@@ -2,7 +2,6 @@ from PySide6.QtCore import QTimer, Signal, Slot, Qt
 from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PySide6.QtGui import QPixmap, QImage
 from ui_mainwindow import Ui_MainWindow
-from topic_monitor import TopicMonitor
 
 import paramiko
 import subprocess
@@ -65,8 +64,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def __del__(self):
         print("Disconnecting from the robot")
-        self.stop_sensors()
-        self.SSH.close()
+        if self.SSH.get_transport() is not None:
+            self.SSH.close()
 
     def closeEvent(self, event):
     # Perform any cleanup before the window closes
@@ -200,11 +199,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def _attempt_ssh_connection(self, address, user, password):
         try:
-            self.SSH.connect(address, username=user, password=password)
+            # Set a timeout for the connection attempt (e.g., 10 seconds)
+            self.SSH.connect(address, username=user, password=password, timeout=3)
             self.line_connection_status.setText('Connected')
             self.text_log.append("Connected.")
             os.environ['ROS_MASTER_URI'] = f"http://{self.address}:11311"
             self.text_log.append(f"ROS_MASTER_URI: {os.environ['ROS_MASTER_URI']}")
+        except paramiko.ssh_exception.NoValidConnectionsError as e:
+            self.line_connection_status.setText('Disconnected')
+            self.text_log.append(f"Could not connect: No valid connections: {str(e)}")
+        except paramiko.ssh_exception.AuthenticationException as e:
+            self.line_connection_status.setText('Disconnected')
+            self.text_log.append(f"Could not connect: Authentication failed: {str(e)}")
         except Exception as e:
             self.line_connection_status.setText('Disconnected')
             self.text_log.append(f"Could not connect: {str(e)}")
@@ -244,11 +250,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         QTimer.singleShot(5000, lambda: self.execute_and_print(f'{self.setup} && echo "Live Topics:\n" && rostopic list', self.text_log))
 
     def stop_sensors(self):
-        self.update_workspace_path()
-        self.text_log.append("Stoping Sensors...")
-        # self.SSH.exec_command(f"{self.setup} && rosnode kill /live_processing /raw_output")
-        self.SSH.exec_command("pkill -f ros")
-        self.set_black_image()
+        if self.SSH.get_transport() is not None:
+            self.update_workspace_path()
+            self.text_log.append("Stoping Sensors...")
+            # self.SSH.exec_command(f"{self.setup} && rosnode kill /live_processing /raw_output")
+            self.SSH.exec_command("pkill -f ros")
+            self.set_black_image()
 
     def preview(self):
         self.text_log.append("Opening Preview (Local)...")

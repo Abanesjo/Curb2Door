@@ -456,7 +456,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Remote Username", None))
         self.line_user.setText(QCoreApplication.translate("MainWindow", u"ai4ce", None))
-        self.line_address.setText(QCoreApplication.translate("MainWindow", u"192.168.8.169", None))
+        self.line_address.setText(QCoreApplication.translate("MainWindow", u"10.42.0.10", None))
         self.button_disconnect.setText(QCoreApplication.translate("MainWindow", u"Close Remote Connection", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Remote Password:", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Remote Address", None))
