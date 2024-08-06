@@ -6,11 +6,11 @@ application/build/
 application/dist/
 application/GUI.spec
 
-tools/application_lite/__pycache__/
-tools/application_lite/build/
-tools/application_lite/dist/
-tools/application/build/
-tools/application/dist/
+tools/application_lite/__pycache__/*
+tools/application_lite/build/*
+tools/application_lite/dist/*
+tools/application/build/*
+tools/application/dist/*
 
 tools/calibration/extrinsic/extrinsic_calibration/build/
 tools/calibration/extrinsic/extrinsic_calibration/bin/
