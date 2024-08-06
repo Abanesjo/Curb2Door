@@ -1,19 +1,20 @@
 *.bag
 .vscode
 
-application/__pycache__/*
+application/__pycache__/
 application/build/
 application/dist/
 application/GUI.spec
 
-tools/application_lite/__pycache__/*
-tools/application_lite/build/*
-tools/application_lite/dist/*
-tools/application/build/*
-tools/application/dist/*
+tools/application_lite/__pycache__/
+tools/application_lite/build/
+tools/application_lite/dist/
+tools/application/build/
+tools/application/dist/
 
 tools/calibration/extrinsic/extrinsic_calibration/build/
 tools/calibration/extrinsic/extrinsic_calibration/bin/
 
 !tools/calibration/extrinsic/extrinsic_calibration/build/.gitkeep
 !tools/calibration/extrinsic/extrinsic_calibration/bin/.gitkeep
+tools/application_lite/build/curb2door_app_lite/EXE-00.toc
