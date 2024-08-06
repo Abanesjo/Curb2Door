@@ -1,0 +1,1 @@
+pyinstaller main.py --onefile --name curb2door_app_lite  --noconsole

@@ -1,0 +1,1 @@
+pyinstaller main.py --name curb2door_app --onefile --noconsole --exclude-module PyQt5 --exclude-module PySide2
