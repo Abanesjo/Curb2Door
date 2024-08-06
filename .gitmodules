@@ -13,3 +13,6 @@
 [submodule "dependencies/r3live"]
 	path = dependencies/r3live
 	url = https://github.com/Abanesjo/r3live
+[submodule "tools/calibration/dependencies/CameraCalibration"]
+	path = tools/calibration/dependencies/CameraCalibration
+	url = https://github.com/dyfcalid/CameraCalibration.git

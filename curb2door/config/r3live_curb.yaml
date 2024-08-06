@@ -16,12 +16,12 @@ r3live_common:
    append_global_map_point_step: 4  # The point step of append point to global map. [default = 4]
 
 r3live_vio:
-   image_width: 1504
-   image_height: 1504
+   image_width: 1152
+   image_height: 1152
    camera_intrinsic:
-      [473.0, 0.0, 752.0,
-      0.0, 473.0, 752.0,
-      0.0, 0.0, 1.0 ] 
+      [305.8511660909695, 0.0, 571.9976412068438, 
+      0.0, 304.8739784192282, 578.9734717897188,
+      0.0, 0.0, 1.0] 
    camera_dist_coeffs: [0.0, 0.0, 0.0, 0.0, 0.0]  #k1, k2, p1, p2, k3
    # Fine extrinsic value. form camera-LiDAR calibration.
    # camera_ext_R:
@@ -29,10 +29,10 @@ r3live_vio:
    #       -0.115094, 0.144933, -0.982724,
    #       0.991414, 0.078576, -0.104523]
    camera_ext_R:
-         [0.0620691, -0.115094, 0.991414, 
-         -0.986315, 0.144933, 0.078576, 
-         -0.152733, -0.982724, -0.104523]
-   camera_ext_t: [-0.213069, 0.440053, 0.0305865]
+         [-0.0641634, -0.0547913, 0.996435, 
+         -0.997889, 0.00639329, -0.0646084, 
+         -0.00991109, -0.998477, -0.0542659]
+   camera_ext_t: [0.0516595, 0.102202, -0.0421169]
    # Rough extrinsic value, form CAD model, is not correct enough, but can be online calibraSted in our datasets.
    # camera_ext_R:
    #    [0, 0, 1,

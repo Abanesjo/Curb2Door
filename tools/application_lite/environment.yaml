@@ -1,0 +1,13 @@
+name: curb2door_gui
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10.12
+  - pip=23.2.1
+  - pip:
+    - numpy==1.25.2
+    - paramiko==3.4.0
+    - PySide6==6.7.2
+    - cryptography==42.0.0
+    - pyinstaller==6.9.0
+    

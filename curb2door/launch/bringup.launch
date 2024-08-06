@@ -22,10 +22,7 @@
         type="livox_ros_driver2_node" required="true"
         output="screen" args="100000000000000"/>
 
-    <include file="$(find insta360_ros_driver)/launch/live_process.launch">
-        <arg name="debug" value="false"/>
-    </include>
-    
+    <include file="$(find insta360_ros_driver)/launch/bringup.launch"/>
 
     <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find curb2door)/config/rviz/preview.rviz"/>
 </launch>
