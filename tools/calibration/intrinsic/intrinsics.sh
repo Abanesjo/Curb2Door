@@ -1,0 +1,1 @@
+python intrinsic_calibration/intrinsicCalib.py -input image -path data/ -image frame_ -bw 13 -bh 7

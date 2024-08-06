@@ -1,3 +1,0 @@
-/home/abanesjo/Desktop/catkin_ws/src/Curb2Door/calibration/extrinsic/build/CMakeFiles/rebuild_cache.dir
-/home/abanesjo/Desktop/catkin_ws/src/Curb2Door/calibration/extrinsic/build/CMakeFiles/edit_cache.dir
-/home/abanesjo/Desktop/catkin_ws/src/Curb2Door/calibration/extrinsic/build/CMakeFiles/run_lidar2camera.dir

@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 import os
+
+data_dir = '/mnt/e/work/curb2door/r3live_samples/processed/r3live_run4/'
 
 def read_matched_odometry_file(filepath):
     odometry_data = []
@@ -36,7 +37,6 @@ def plot_trajectory(odometry_data):
     ax.legend()
     plt.show()
 
-data_dir = '/mnt/e/work/curb2door/r3live_samples/processed/r3live_run4/'
 matched_odometry_file_path = os.path.join(data_dir, 'matched_odometry.txt')
 
 if __name__ == '__main__':

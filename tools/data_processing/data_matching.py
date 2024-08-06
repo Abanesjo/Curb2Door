@@ -5,6 +5,12 @@ import os
 import glob
 import shutil
 
+data_dir = '/mnt/e/work/curb2door/r3live_samples/processed/r3live_run4/'
+odometry_file_path = os.path.join(data_dir, 'odom.txt')
+image_dir = os.path.join(data_dir, 'img')
+output_image_dir = os.path.join(data_dir, 'mapped_images')
+output_odometry_file = os.path.join(data_dir, 'matched_odometry.txt')
+
 def parse_odometry_file(filepath):
     odometry_data = []
     with open(filepath, 'r') as file:
@@ -31,12 +37,6 @@ def match_images_to_odometry(image_folder, odometry_data, threshold_ns=1_000_000
             matched_data.append((index, image_file, closest_entry))
     return matched_data
 
-data_dir = '/mnt/e/work/curb2door/r3live_samples/processed/r3live_run4/'
-odometry_file_path = os.path.join(data_dir, 'odom.txt')
-image_dir = os.path.join(data_dir, 'img')
-output_image_dir = os.path.join(data_dir, 'mapped_images')
-output_odometry_file = os.path.join(data_dir, 'matched_odometry.txt')
-
 if __name__ == '__main__':
     if not os.path.exists(image_dir) or not os.path.exists(odometry_file_path):
         raise FileNotFoundError('Image or odometry data not found in the specified directory')
@@ -51,7 +51,7 @@ if __name__ == '__main__':
         print("Writing Outputs")
         for index, image_file, (odometry_timestamp, odometry_data) in tqdm(matched_data):
             out_file.write(f"{index} {' '.join(map(str, odometry_data))}\n")
-            new_image_filename = f"{index}.png"
+            new_image_filename = f"{index:06d}.png"
             shutil.copy(image_file, os.path.join(output_image_dir, new_image_filename))
 
     print(f"Matched odometry written to {output_odometry_file}")
