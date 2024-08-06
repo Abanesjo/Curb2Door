@@ -1,4 +1,4 @@
-name: curb2door_gui
+name: gui
 channels:
   - conda-forge
 dependencies:
@@ -10,4 +10,5 @@ dependencies:
     - PySide6==6.7.2
     - cryptography==42.0.0
     - pyinstaller==6.9.0
+    - pyqtdarktheme==2.1.0
     
