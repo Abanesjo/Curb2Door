@@ -1,12 +1,11 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="rviz" default="true"/>
-    <!-- <arg name="bag_path" default="/mnt/p/curb2door/bag/undistorted"/> -->
     <arg name="bag_path" default="/mnt/p/curb2door/bag/undistorted"/>
     <arg name="bag_file" default="loop2_undistorted.bag"/>
     <arg name="system" default="curb"/>
     <arg name="record" default="false"/>
-    <arg name="record_path" default="/mnt/e/work/curb2door/r3live_samples/bag_r3live"/>
+    <arg name="record_path" default="/mnt/p/curb2door/bag/r3live"/>
 
     <node if="$(arg record)" name="rosbag_record" pkg="rosbag" type="record" args="-O $(arg record_path)/r3live_$(arg bag_file) /camera_odom /camera_path /track_img /raw_in_img" output="screen"/>
 

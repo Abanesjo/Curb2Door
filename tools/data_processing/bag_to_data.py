@@ -6,8 +6,8 @@ import os
 import cv2
 from cv_bridge import CvBridge
 
-bag_filename = '/mnt/e/work/curb2door/r3live_samples/bag_r3live/r3live_run4.bag'
-output_dir = '/mnt/e/work/curb2door/r3live_samples/processed/r3live_run4'
+bag_filename = '/mnt/p/curb2door/bag/r3live/r3live_loop2_undistorted.bag'
+output_dir = '/mnt/p/curb2door/bag/extracted_data/r3live_loop2_undistorted'
 odom_file = os.path.join(output_dir, 'odom.txt')
 
 bridge = CvBridge()

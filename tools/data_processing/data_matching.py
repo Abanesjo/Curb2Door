@@ -5,7 +5,7 @@ import os
 import glob
 import shutil
 
-data_dir = '/mnt/e/work/curb2door/r3live_samples/processed/r3live_run4/'
+data_dir = '/mnt/p/curb2door/bag/extracted_data/r3live_loop2_undistorted'
 odometry_file_path = os.path.join(data_dir, 'odom.txt')
 image_dir = os.path.join(data_dir, 'img')
 output_image_dir = os.path.join(data_dir, 'mapped_images')

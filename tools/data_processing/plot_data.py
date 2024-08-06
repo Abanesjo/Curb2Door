@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 import os
 
-data_dir = '/mnt/e/work/curb2door/r3live_samples/processed/r3live_run4/'
+data_dir = '/mnt/p/curb2door/bag/extracted_data/r3live_loop2_undistorted'
 
 def read_matched_odometry_file(filepath):
     odometry_data = []
