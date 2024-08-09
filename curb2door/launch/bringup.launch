@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="rviz"  default="False"/>
-    <arg name="lidar_msg" default="CustomMsg"/>
+    <arg name="lidar_msg" default="CustomMsg"/> <!-- CustomMsg or PointCloud2 -->
 
     <param name="multi_topic" value="0"/>
     <param name="data_src" value="0"/>

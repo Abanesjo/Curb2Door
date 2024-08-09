@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="config" default="intrinsics.yaml"/>
+    <arg name="raw_bag_folder" default="$(find curb2door)/bag/raw"/>
+    <arg name="compressed_bag_folder" default="$(find curb2door)/bag/compressed"/>
+    <arg name="undistorted_bag_folder" default="$(find curb2door)/bag/undistorted"/>
+
+    <param name="raw_bag_folder" value="$(arg raw_bag_folder)"/>
+    <param name="compressed_bag_folder" value="$(arg compressed_bag_folder)"/>
+    <param name="undistorted_bag_folder" value="$(arg undistorted_bag_folder)"/>
+
+    <rosparam file="$(find curb2door)/config/$(arg config)" command="load"/>
+
+    <node name="undistortion_node" pkg="insta360_ros_driver" type="undistortion.py" output="screen"/>
+</launch>

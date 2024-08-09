@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="bag_path" default="$(find curb2door)/bag_raw"/>
+    <arg name="bag_path" default="$(find curb2door)/bag/compressed"/>
 	<arg name="bag_name" default="run.bag"/>
     
     <node name="rosbag" pkg="rosbag" type="record" args="-O $(arg bag_path)/$(arg bag_name) /livox/lidar /livox/imu /front_camera_image/compressed /back_camera_image/compressed" output="screen"/>
