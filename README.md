@@ -71,14 +71,12 @@ python plot_data.py #Plots odometry data
 ## Graphical User Interface
 A GUI has been developed to expedite data collection and it appears as follows:
 
-<center>Screen for Establishing Remote Connection</center>
+<p style="text-align: center;">Screen for Establishing Remote Connection</p>
 
 ![Remote](docs/app_1.png)
-
-<center>Screen for Managing ROS-Related Tasks</center>
+<p style="text-align: center;">Screen for Managing ROS-Related Tasks</p>
 
 ![ROS](docs/app_2.png)
-
-<center>Screen for Monitoring Topics</center>
+<p style="text-align: center;">Screen for Monitoring Topics</p>
 
 ![Analytics](docs/app_3.png)
