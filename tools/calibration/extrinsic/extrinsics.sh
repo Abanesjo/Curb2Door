@@ -1,0 +1,1 @@
+./extrinsic_calibration/bin/run_lidar2camera data3/image.png data3/pointcloud.pcd data3/intrinsics.json data3/extrinsics.json
