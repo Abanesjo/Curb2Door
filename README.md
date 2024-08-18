@@ -33,6 +33,7 @@ The LiDAR and camera can be activated using the following
 ```
 roslaunch curb2door bringup.launch
 ```
+Below are the launch file arguments.
 | Argument | Values (Default) | Description |
 | ----------- | ----------- | -----------  | 
 | lidar_msg | CustomMsg/PointCloud2 (CustomMsg) | Point Cloud Message Type |
@@ -42,24 +43,42 @@ To begin recording data, the launch file can be used.
 ```
 roslaunch curb2door record.launch
 ```
+Below are the launch file arguments.
 | Argument | Values (Default) | Description |
 | ----------- | ----------- | -----------  | 
-| bag_path | ($(curb2door)/compressed) | Directory to save recorded rosbag files |
+| bag_path | (curb2door/compressed) | Directory to save recorded rosbag files |
 | bag_name | (run.bag) | rosbag filename |
 ## Image Undistortion
 Before using R3LIVE, the camera images must first be undistorted.
 ```
 roslaunch curb2door undistort.launch
 ```
+Below are the launch file arguments.
+| Argument | Values (Default) | Description |
+| ----------- | ----------- | -----------  | 
+| config | (intrinsics.yaml) | .yaml file containing camera intrinsics |
+| compressed_bag_folder | (curb2door/compressed) | Folder containing input bag files with distorted images |
+| undistorted_bag_folder | (curb2door/undistorted) | Folder containing output bag files with undistorted images |
+
 ## R3LIVE
 R3LIVE can be used to create a 3D map and also estimate odometry.
 ```
 roslaunch curb2oor r3live.launch
 ```
+Below are the launch file arguments.
+| Argument | Values (Default) | Description |
+| ----------- | ----------- | -----------  | 
+| system | curb/red (curb) | system that is used. "curb" refers to the curb2door handheld mount, "red" refers to the red MappingNYC mount, etc. |
+| rviz | True/False (True) | Show live 3D Mapping using RViz |
+| bag_path | (curb2door/bag/undistorted) | Folder containing input bag files with image and pointcloud data |
+| bag_file | (run_undistorted.bag) | Input bag filename |
+| record | True/False (False) | Whether to record odometry to bag file |
+| record_path | curb2door/bag/r3live_output | Path to save output bag files | 
+
 An example 3D map is shown below.
 ![r3live_result](docs/r3live_result.png)
 ## Exporting Data
-Using the resultant bag file from R3LIVE, correspondence between camera frame and camera pose can be created. Before running each python file, make sure that the file paths specified within them are correct.
+Using the resultant bag file from R3LIVE, correspondence between camera frame and camera pose can be created. Before running each python file, **make sure that the file paths specified within them are correct.**
 ```
 cd tools/data_processing
 python bag_to_data.py # Converts bag file to odometry and image frames

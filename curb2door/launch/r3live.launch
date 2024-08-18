@@ -3,7 +3,7 @@
     <arg name="rviz" default="true"/>
     <arg name="bag_path" default="$(find curb2door)/bag/undistorted"/>
     <arg name="bag_file" default="run_undistorted.bag"/>
-    <arg name="system" default="curb"/>
+    <arg name="system" default="curb"/> <!--curb or red-->
     <arg name="record" default="false"/>
     <arg name="record_path" default="$(find curb2door)/bag/r3live_output)"/>
 
