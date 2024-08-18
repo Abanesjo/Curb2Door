@@ -88,14 +88,57 @@ python plot_data.py #Plots odometry data
 ![odom_plot](docs/odom_plot.png)
 
 ## Graphical User Interface
-A GUI has been developed to expedite data collection and it appears as follows:
+A GUI has been developed to expedite data collection.
+
+### Installation
+
+#### Linux
+For Linux, navigate to the **releases** tab and download the executable <code>curb2door_app</code>. Then, launch it using:
+```
+chmod +x curb2door_app
+./curb2door_app
+```
+#### Windows
+For Windows, navigate to the **releases** tab and download the executable <code>curb2door_app_lite.exe</code>. Then, launch it via double-clicking the app icon.
+
+#### Mac
+For Mac, an executable is not available. However, the app can be launched easily via conda. Navigate to the <code>tools/application_lite</code> folder. Then, run the following.
+```
+conda env create -f environment.yaml
+conda activate gui
+python3 main.py
+```
+
+### Usage
+The app contains three primary tabs. The first tab allows a remote SSH connection with the robot to be established. If the app is running on the robot itself, you can set the remote address to "localhost". Otherwise, use <code>ifconfig</code> to determine its IP address.
 
 <p style="text-align: center;">Screen for Establishing Remote Connection</p>
 
 ![Remote](docs/app_1.png)
+
+The second tab allows for compiling the ROS code, starting/stopping the sensors, and recording data. The standard procedure for recording data is as follows:
+
+1. Ensure the correct catkin workspace path is set. Unless this has been changed, the default value should be OK.
+2. Build and Source the workspace using the button if you've made any changes to the source code (on the robot)
+3. Grant camera permissions to allow the 360 camera to be accessed using the button. To know if things worked properly, the text log should show something similar to the following line
+```
+/dev/insta -> /bus/usb/001/002
+```
+This shows that the symlink has been properly created. If it doesn't work, make sure that the camera is turned on. You can also try restarting the app and pressing it again.
+
+4. **Before starting sensors**, make sure to select the POINTCLOUD FORMAT on the right hand side. Usually, for data collection, we want "Livox Custom Msg". However, for camera calibration, it is useful to have "PointCloud2". Note that you need to **make sure the sensors are stopped before changing these**.
+5. If everything went well, you can press "Start Sensors". You can quickly go to the <code>Analysis</code> tab at the top and press "Monitor" to see the topics that you have. If all of them are publishing, then everything is working as intended.
+
+6. To record data, make sure that the bag file path and bag file name are specified. **Make sure that the bag file path is sa folder that exists**, otherwise the file will not be saved.
+
+7. Press "Begin Recording" to start collecting data and "End Recording" to save data.
+
+8. Make sure to change the bag file name to prevent overwriting the previous recording.
 <p style="text-align: center;">Screen for Managing ROS-Related Tasks</p>
 
 ![ROS](docs/app_2.png)
+
+The third screen, as mentioned earlier, provides useful live analytics for making sure that the sensors are working as intended.
 <p style="text-align: center;">Screen for Monitoring Topics</p>
 
 ![Analytics](docs/app_3.png)
