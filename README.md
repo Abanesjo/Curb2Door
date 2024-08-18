@@ -112,7 +112,7 @@ python3 main.py
 ### Usage
 The app contains three primary tabs. The first tab allows a remote SSH connection with the robot to be established. If the app is running on the robot itself, you can set the remote address to "localhost". Otherwise, use <code>ifconfig</code> to determine its IP address.
 
-<p style="text-align: center;">Screen for Establishing Remote Connection</p>
+<p align="center">Screen for Establishing Remote Connection</p>
 
 ![Remote](docs/app_1.png)
 
@@ -134,11 +134,13 @@ This shows that the symlink has been properly created. If it doesn't work, make 
 7. Press "Begin Recording" to start collecting data and "End Recording" to save data.
 
 8. Make sure to change the bag file name to prevent overwriting the previous recording.
-<p style="text-align: center;">Screen for Managing ROS-Related Tasks</p>
+
+<p align="center">Screen for Managing ROS-Related Tasks</p>
 
 ![ROS](docs/app_2.png)
 
 The third screen, as mentioned earlier, provides useful live analytics for making sure that the sensors are working as intended.
-<p style="text-align: center;">Screen for Monitoring Topics</p>
+
+<p align="center">Screen for Monitoring Topics</p>
 
 ![Analytics](docs/app_3.png)
