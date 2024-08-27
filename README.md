@@ -9,8 +9,8 @@ This repository contains code for the NYU Tandon Undergraduate Summer Research P
 3. [Processing Data](#Processing-Data)
 4. [Exporting Data](#Exporting-Data)
 5. [Graphical User Interface](#graphical-user-interface)
-
 ---
+
 ## Installation
 ### Dependencies
 The package files, along with the necessary submodules, can be installed with the following command. Make sure to run it in the ```catkin_ws/src``` folder. 
@@ -26,8 +26,15 @@ Note that each of the submodules still requires their individual dependencies as
 - [livox_camera_calib](https://github.com/hku-mars/livox_camera_calib.git)
 - [CameraCalibration](https://github.com/dyfcalid/CameraCalibration)
 
+*Note that when installing on the handheled device, you can delete the all the dependencies in the <code>dependencies</code> folder except for <code>insta360_ros_driver</code> and <code>livox_ros_driver2</code>. Most likely, the requirements for the other dependencies aren't installed, which may cause an error in compiling.
+
 ## Recording Data
 For recording data, it is recommended to use the [Graphical User Interface](#graphical-user-interface) to simplify the process. However, it can be done manually as well.
+
+First, make sure to grant access rights to the camera
+```
+rosrun insta360_ros_driver setup.sh
+```
 
 The LiDAR and camera can be activated using the following
 ```
