@@ -31,7 +31,9 @@ Note that each of the submodules still requires their individual dependencies as
 ## Recording Data
 For recording data, it is recommended to use the [Graphical User Interface](#graphical-user-interface) to simplify the process. However, it can be done manually as well.
 
-First, make sure to grant access rights to the camera
+First, **make sure that the camera is set to dual-lens mode**
+
+Then, make sure to grant access rights to the camera
 ```
 rosrun insta360_ros_driver setup.sh
 ```
