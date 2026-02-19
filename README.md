@@ -1,6 +1,13 @@
 # Curb2Door
 
-This repository contains code for the NYU Tandon Undergraduate Summer Research Program (UGSRP) Curb2Door Project. The project entails the collection and processing of 360 images and LiDAR pointcloud data in order to create a simulated environment viable for training autonomous navigation systems. 
+This repository contains code for the NYU Tandon Undergraduate Summer Research Program (UGSRP) Curb2Door Project. The project entails the collection and processing of 360 images and LiDAR pointcloud data in order to create a simulated environment viable for training autonomous navigation systems.
+
+<img width="2500" height="1666" alt="poster pptx" src="https://github.com/user-attachments/assets/e56b3e8f-3db1-47b5-a32d-013f1facb140" />
+
+<p align="center">
+  <a href="https://youtu.be/-B9GN551KXo">Youtube Video</a>
+</p>
+
 
 ---
 ## Table of Contents
